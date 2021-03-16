@@ -1,8 +1,12 @@
 package com.aaa.automaticanalyzer.controllers;
 
+import com.aaa.automaticanalyzer.model.User;
+import com.aaa.automaticanalyzer.model.UserRestInput;
 import com.aaa.automaticanalyzer.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -16,7 +20,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createPock(@RequestBody final CreatePockRestInput pockRestInput, final User user) {
+    public ResponseEntity<Void> createPock(@RequestBody final UserRestInput pockRestInput, final User user) {
 //        try
 //        {
 //            return PockMappers.mapPockToPockRestOutput(pocksService.createPock(pockRestInput, user));
