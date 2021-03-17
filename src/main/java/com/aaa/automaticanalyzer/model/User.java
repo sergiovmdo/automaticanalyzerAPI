@@ -3,23 +3,20 @@ package com.aaa.automaticanalyzer.model;
 import lombok.Data;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 @Entity
-//@Table(name = "USERS")
+@Table(name = "USERS")
 @Data
 public class User {
     private String mail;
     private String name;
     private String firstSurname;
     private String secondSurname;
-    private String birthDay;
+    private String birthDate;
     private String phoneNumber;
 
     @ElementCollection
@@ -27,7 +24,7 @@ public class User {
 
     @Column(unique = true)
     @Id
-    private String DNI;
+    private String dni;
 
     public void generateAndSetDiseases() {
         Random random = new Random();
@@ -35,7 +32,7 @@ public class User {
         List<Diseases> diseasesList = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
-            int disease = random.nextInt(4) + 1;
+            int disease = random.nextInt(4);
             diseasesList.add(Diseases.values()[disease]);
         }
 

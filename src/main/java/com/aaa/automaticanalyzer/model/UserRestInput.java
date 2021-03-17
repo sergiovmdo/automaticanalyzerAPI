@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class UserRestInput {
-    private String id;
     private String mail;
 
     @NotNull(message = "Name is needed")
@@ -16,9 +15,9 @@ public class UserRestInput {
     @NotNull(message = "First Surname is needed")
     private String firstSurname;
     private String secondSurname;
-    private String birthDay;
+    private String birthDate;
     private String phoneNumber;
 
     @NotNull(message = "DNI is needed")
-    private String DNI;
+    private String dni;
 }
