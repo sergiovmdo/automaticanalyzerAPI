@@ -20,7 +20,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createPock(@RequestBody final UserRestInput pockRestInput, final User user) {
+    public ResponseEntity<Void> createUser(@RequestBody final UserRestInput userRestInput) {
 //        try
 //        {
 //            return PockMappers.mapPockToPockRestOutput(pocksService.createPock(pockRestInput, user));
@@ -36,6 +36,8 @@ public class LoginController {
 //            log.error("Returning a freshly created pock [{}] returned PockNotFound", pockNotFound.getId());
 //            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 //        }
+        userService.createUser(userRestInput);
         return ResponseEntity.ok().build();
     }
+
 }
