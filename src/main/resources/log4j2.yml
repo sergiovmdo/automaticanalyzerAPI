@@ -1,0 +1,27 @@
+Configuration:
+  Properties:
+    Property:
+      - name: consolePattern
+        value: "%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%-5p}{blue} %clr{[%t, %tid]}{magenta} %clr{[%notEmpty{uid=%X{userId}}%notEmpty{; firebaseId=%X{firebaseId}}%notEmpty{; mail=%X{userMail}}]}{red} %clr{[%c{1}.%M:%L]}{cyan} %m%n"
+### remove mail from prod logging
+  Appenders:
+    Console:
+      name: Console
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: ${consolePattern}
+
+  Loggers:
+    Root:
+      level: "INFO"
+      AppenderRef:
+        - ref: Console
+    logger:
+      - name: com.aaa
+        level: "DEBUG"
+      - name: org.springframework.orm.jpa
+        level: "DEBUG"
+      - name: org.hibernate.SQL
+        level: "DEBUG"
+      - name: org.hibernate.type.descriptor.sql.BasicBinder
+        level: "TRACE"
