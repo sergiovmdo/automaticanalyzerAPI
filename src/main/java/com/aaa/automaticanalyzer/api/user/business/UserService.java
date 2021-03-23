@@ -1,11 +1,11 @@
-package com.aaa.automaticanalyzer.service;
+package com.aaa.automaticanalyzer.api.user.business;
 
 
 import com.aaa.automaticanalyzer.exceptions.InvalidBirthDate;
 import com.aaa.automaticanalyzer.exceptions.InvalidDNI;
 import com.aaa.automaticanalyzer.exceptions.InvalidMail;
 import com.aaa.automaticanalyzer.model.User;
-import com.aaa.automaticanalyzer.model.UserRestInput;
+import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 
 public interface UserService {
     /**

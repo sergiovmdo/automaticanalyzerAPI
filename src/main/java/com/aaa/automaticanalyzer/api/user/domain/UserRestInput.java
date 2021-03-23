@@ -1,4 +1,4 @@
-package com.aaa.automaticanalyzer.model;
+package com.aaa.automaticanalyzer.api.user.domain;
 
 import lombok.Data;
 

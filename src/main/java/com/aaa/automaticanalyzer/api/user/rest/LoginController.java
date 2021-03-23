@@ -1,8 +1,7 @@
-package com.aaa.automaticanalyzer.controllers;
+package com.aaa.automaticanalyzer.api.user.rest;
 
-import com.aaa.automaticanalyzer.model.User;
-import com.aaa.automaticanalyzer.model.UserRestInput;
-import com.aaa.automaticanalyzer.service.UserService;
+import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
+import com.aaa.automaticanalyzer.api.user.business.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,10 +1,9 @@
-package com.aaa.automaticanalyzer.service.impl;
+package com.aaa.automaticanalyzer.api.user.business;
 
-import com.aaa.automaticanalyzer.mapping.UserMapper;
+import com.aaa.automaticanalyzer.api.user.rest.mapping.UserMapper;
 import com.aaa.automaticanalyzer.model.User;
-import com.aaa.automaticanalyzer.model.UserRestInput;
+import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 import com.aaa.automaticanalyzer.repository.UserRepository;
-import com.aaa.automaticanalyzer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

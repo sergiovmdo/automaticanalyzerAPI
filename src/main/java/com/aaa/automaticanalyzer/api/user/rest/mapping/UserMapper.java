@@ -1,7 +1,7 @@
-package com.aaa.automaticanalyzer.mapping;
+package com.aaa.automaticanalyzer.api.user.rest.mapping;
 
 import com.aaa.automaticanalyzer.model.User;
-import com.aaa.automaticanalyzer.model.UserRestInput;
+import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 
 public class UserMapper {
     public static User createUserFromRestInput(UserRestInput input) {
