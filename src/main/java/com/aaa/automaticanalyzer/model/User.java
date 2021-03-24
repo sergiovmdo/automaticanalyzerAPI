@@ -26,6 +26,8 @@ public class User {
     @Id
     private String dni;
 
+    private String token;
+
     public void generateAndSetDiseases() {
         Random random = new Random();
         int quantity = random.nextInt(4) + 1;
