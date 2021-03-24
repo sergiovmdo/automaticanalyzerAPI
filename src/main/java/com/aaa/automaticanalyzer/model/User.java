@@ -27,6 +27,7 @@ public class User {
     private String dni;
 
     private String token;
+    private String password;
 
     public void generateAndSetDiseases() {
         Random random = new Random();

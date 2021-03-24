@@ -17,6 +17,7 @@ public class UserRestInput {
     private String secondSurname;
     private String birthDate;
     private String phoneNumber;
+    private String password;
 
     @NotNull(message = "DNI is needed")
     private String dni;

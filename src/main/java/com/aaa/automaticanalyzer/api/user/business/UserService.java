@@ -7,6 +7,9 @@ import com.aaa.automaticanalyzer.exceptions.InvalidMail;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 public interface UserService {
     /**
      * Creates a new user from the given information.
@@ -17,4 +20,8 @@ public interface UserService {
      * @throws InvalidBirthDate
      */
     User createUser(final UserRestInput input);
+
+    Optional<User> validateToken(String token);
+
+    Optional<User> getUserByDNI(final String dni);
 }

@@ -7,7 +7,7 @@ spring:
     hibernate:
       ddl-auto: update
 
-oauthKey: 187Pd7q12FgqNqIm63-qrghGH38CJAIrHdueGxjuvi6YEbd2kGmAGuP/Q8HJ3HJq
+oauthKey: 187Pd7q12FgqNqIm63AqrghGH38CJAIrHdueGxjuvi6YEbd2kGmAGuP/Q8HJ3HJq
 
 server:
   port: 9000
