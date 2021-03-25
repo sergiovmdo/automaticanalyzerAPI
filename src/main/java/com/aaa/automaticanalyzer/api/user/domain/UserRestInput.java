@@ -2,7 +2,6 @@ package com.aaa.automaticanalyzer.api.user.domain;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 @Data
