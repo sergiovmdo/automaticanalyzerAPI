@@ -33,7 +33,9 @@ public class UserServiceImplementation implements UserService {
         User user = UserMapper.createUserFromRestInput(input);
         user.generateAndSetDiseases();
         createAndAssociateToken(user);
-        hashPassword(user, input.getPassword());
+        String hashedPassword = hashPassword(input.getPassword());
+        if (hashedPassword != null)
+            user.setPassword(hashedPassword);
         userRepository.save(user);
 
         return user;
@@ -73,10 +75,9 @@ public class UserServiceImplementation implements UserService {
     /**
      * Hashes the password given by the user and stores it in the user object hashed with SHA-512
      *
-     * @param user     the user itself
      * @param password the given password
      */
-    private void hashPassword(User user, String password) {
+    public String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             byte[] bytes = md.digest(password.getBytes());
@@ -86,10 +87,12 @@ public class UserServiceImplementation implements UserService {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
 
-            user.setPassword(sb.toString());
+            return sb.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+
+        return null;
     }
 
     /**

@@ -24,4 +24,6 @@ public interface UserService {
     Optional<User> validateToken(String token);
 
     Optional<User> getUserByDNI(final String dni);
+
+    public String hashPassword(String password);
 }
