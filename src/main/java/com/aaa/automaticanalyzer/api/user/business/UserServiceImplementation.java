@@ -1,5 +1,6 @@
 package com.aaa.automaticanalyzer.api.user.business;
 
+import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.api.user.rest.mapping.UserMapper;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
@@ -7,6 +8,7 @@ import com.aaa.automaticanalyzer.repository.UserRepository;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -93,6 +95,24 @@ public class UserServiceImplementation implements UserService {
         }
 
         return null;
+    }
+
+    @Override
+    public ResponseEntity<Boolean> changePassword(PasswordRestInput password, String dni) {
+        Optional<User> user = userRepository.findById(dni);
+        if (user.isPresent()) {
+            //TODO: Treat all the API errors
+        }
+
+        if (hashPassword(password.getCurrentPassword()).equals(user.get().getPassword())) {
+            String hashedPassword = hashPassword(password.getPassword());
+            user.get().setPassword(hashedPassword);
+            userRepository.save(user.get());
+            return ResponseEntity.ok(true);
+        } else {
+            //TODO: La contraseña no es correcta
+        }
+        return ResponseEntity.ok(false);
     }
 
     /**

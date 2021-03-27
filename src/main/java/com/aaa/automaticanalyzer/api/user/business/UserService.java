@@ -1,11 +1,13 @@
 package com.aaa.automaticanalyzer.api.user.business;
 
 
+import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.exceptions.InvalidBirthDate;
 import com.aaa.automaticanalyzer.exceptions.InvalidDNI;
 import com.aaa.automaticanalyzer.exceptions.InvalidMail;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
+import org.springframework.http.ResponseEntity;
 
 import javax.swing.text.html.Option;
 import java.util.Optional;
@@ -25,5 +27,7 @@ public interface UserService {
 
     Optional<User> getUserByDNI(final String dni);
 
-    public String hashPassword(String password);
+    String hashPassword(String password);
+
+    ResponseEntity<Boolean> changePassword(PasswordRestInput password, String dni);
 }
