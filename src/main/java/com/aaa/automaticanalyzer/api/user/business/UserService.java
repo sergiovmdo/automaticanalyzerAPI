@@ -29,5 +29,5 @@ public interface UserService {
 
     String hashPassword(String password);
 
-    ResponseEntity<Boolean> changePassword(PasswordRestInput password, String dni);
+    ResponseEntity<Void> changePassword(PasswordRestInput password, String dni);
 }

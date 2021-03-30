@@ -5,6 +5,7 @@ import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.common.AuthAwareRestController;
 import com.aaa.automaticanalyzer.model.User;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,7 +27,7 @@ public class UserController {
     }
 
     @PutMapping
-    public void changePassword(@RequestBody final PasswordRestInput password, final User user){
-        userService.changePassword(password, user.getDni());
+    public ResponseEntity<Void> changePassword(@RequestBody final PasswordRestInput password, final User user){
+       return userService.changePassword(password, user.getDni());
     }
 }

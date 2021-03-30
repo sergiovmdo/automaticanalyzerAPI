@@ -98,21 +98,23 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public ResponseEntity<Boolean> changePassword(PasswordRestInput password, String dni) {
+    public ResponseEntity<Void> changePassword(PasswordRestInput password, String dni) {
         Optional<User> user = userRepository.findById(dni);
         if (user.isPresent()) {
             //TODO: Treat all the API errors
+            final User u = user.get();
+            if (hashPassword(password.getCurrentPassword()).equals(u.getPassword())) {
+                String hashedPassword = hashPassword(password.getPassword());
+                u.setPassword(hashedPassword);
+                userRepository.save(u);
+                return ResponseEntity.ok(null);
+            } else {
+                //TODO: La contraseña no es correcta
+            }
         }
 
-        if (hashPassword(password.getCurrentPassword()).equals(user.get().getPassword())) {
-            String hashedPassword = hashPassword(password.getPassword());
-            user.get().setPassword(hashedPassword);
-            userRepository.save(user.get());
-            return ResponseEntity.ok(true);
-        } else {
-            //TODO: La contraseña no es correcta
-        }
-        return ResponseEntity.ok(false);
+
+        return ResponseEntity.badRequest().build();
     }
 
     /**
