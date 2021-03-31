@@ -1,7 +1,6 @@
 package com.aaa.automaticanalyzer.model;
 
 import lombok.Data;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,7 +19,10 @@ public class User {
     private String phoneNumber;
 
     @ElementCollection
-    private List<Diseases> userDiseases;
+    private List<Disease> userDiseases;
+
+    @ElementCollection
+    private List<String> userAnalysis;
 
     @Column(unique = true)
     @Id
@@ -32,11 +34,11 @@ public class User {
     public void generateAndSetDiseases() {
         Random random = new Random();
         int quantity = random.nextInt(4) + 1;
-        List<Diseases> diseasesList = new ArrayList<>();
+        List<Disease> diseasesList = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
             int disease = random.nextInt(4);
-            diseasesList.add(Diseases.values()[disease]);
+            diseasesList.add(Disease.values()[disease]);
         }
 
         userDiseases = diseasesList;

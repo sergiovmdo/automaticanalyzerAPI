@@ -1,5 +1,5 @@
 package com.aaa.automaticanalyzer.model;
 
-public enum Diseases {
+public enum Disease {
     DIABETES, HYPOTHYROIDISM, TRANSPLANT, HYPERCHOLESTEROLEMIA
 }

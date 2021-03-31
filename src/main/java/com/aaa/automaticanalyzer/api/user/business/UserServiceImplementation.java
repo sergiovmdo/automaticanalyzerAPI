@@ -25,7 +25,7 @@ import java.util.UUID;
 public class UserServiceImplementation implements UserService {
 
     private final UserRepository userRepository;
-    private static final String SERVICENAME = "AAA";
+    private static final String SERVICENAME = "UserService";
 
     @Value("${oauthKey}")
     private String tokenKey;
