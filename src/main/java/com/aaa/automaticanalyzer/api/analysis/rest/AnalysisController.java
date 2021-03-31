@@ -5,12 +5,16 @@ import com.aaa.automaticanalyzer.api.analysis.domain.AnalysisRestInput;
 import com.aaa.automaticanalyzer.api.user.business.UserService;
 import com.aaa.automaticanalyzer.common.AuthAwareRestController;
 import com.aaa.automaticanalyzer.model.User;
+import com.aaa.automaticanalyzer.model.analysis.Analysis;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/analysis")
@@ -21,6 +25,11 @@ public class AnalysisController {
 
     @PostMapping
     public ResponseEntity<Void> addBloodAnalysis(@RequestBody final AnalysisRestInput analysis, final User user){
-        return ResponseEntity.ok(null);
+        return analysisService.addBloodAnalysis(analysis, user);
+    }
+
+    @GetMapping
+    public List<Analysis> getAnalysis(final User user){
+        return analysisService.getAnalysis(user);
     }
 }

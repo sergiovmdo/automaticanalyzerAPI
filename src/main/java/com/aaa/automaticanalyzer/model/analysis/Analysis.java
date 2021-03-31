@@ -1,12 +1,12 @@
 package com.aaa.automaticanalyzer.model.analysis;
 
 import com.aaa.automaticanalyzer.model.Disease;
+import com.aaa.automaticanalyzer.model.User;
 import lombok.Data;
+import org.hibernate.annotations.Generated;
+import org.hibernate.tuple.GenerationTiming;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ANALYSIS")
@@ -14,9 +14,15 @@ import javax.persistence.Table;
 public class Analysis {
     @Column(unique = true)
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    private String userDNI;
+    @ManyToOne
+    private User user;
 
+    private Disease disease;
+    private Long date;
+
+    private String analysisData;
 
 }

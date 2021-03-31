@@ -21,9 +21,6 @@ public class User {
     @ElementCollection
     private List<Disease> userDiseases;
 
-    @ElementCollection
-    private List<String> userAnalysis;
-
     @Column(unique = true)
     @Id
     private String dni;
