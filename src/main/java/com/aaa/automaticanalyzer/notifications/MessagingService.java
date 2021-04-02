@@ -15,12 +15,13 @@ import org.springframework.stereotype.Service;
 public class MessagingService {
 
     @Async
-    public void notifyUser(final User user, String title, String body) {
+    public void notifyUser(final User user, String title, String body, NotificationType category) {
         if (user.getFirebaseToken() != null) {
             try {
                 Message message = Message.builder().setToken(user.getFirebaseToken())
                         .putData("title", title)
                         .putData("body", body)
+                        .putData("category", category.name())
                         .build();
                 FirebaseMessaging.getInstance().send(message);
             } catch (FirebaseMessagingException e) {

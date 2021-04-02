@@ -5,6 +5,7 @@ import com.aaa.automaticanalyzer.api.analysis.rest.mapping.AnalysisMapper;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.model.analysis.Analysis;
 import com.aaa.automaticanalyzer.notifications.MessagingService;
+import com.aaa.automaticanalyzer.notifications.NotificationType;
 import com.aaa.automaticanalyzer.repository.AnalysisRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class AnalysisServiceImplementation implements AnalysisService {
         analysis.setUser(user);
         analysisRepository.save(analysis);
 
-        messagingService.notifyUser(user, "FUNCIONA", "O MATO A GRETA");
+        messagingService.notifyUser(user, "FUNCIONA", "O MATO A GRETA", NotificationType.ANALYSIS);
         return null;
     }
 
