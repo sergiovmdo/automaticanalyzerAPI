@@ -11,6 +11,8 @@ public class HyperCholesterolemiaAnalysis extends BaseAnalysis<HyperCholesterole
 
     private String cLDL;
     private String totalCholesterol;
+    private String maxCLDL = "100";
+    private String maxTotalCholesterol = "200";
 
     @SneakyThrows
     @Override
