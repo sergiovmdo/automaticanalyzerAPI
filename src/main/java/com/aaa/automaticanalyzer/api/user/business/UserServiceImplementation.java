@@ -2,6 +2,7 @@ package com.aaa.automaticanalyzer.api.user.business;
 
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.api.user.rest.mapping.UserMapper;
+import com.aaa.automaticanalyzer.model.FCMToken;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 import com.aaa.automaticanalyzer.repository.UserRepository;
@@ -115,6 +116,13 @@ public class UserServiceImplementation implements UserService {
 
 
         return ResponseEntity.badRequest().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> setFCMToken(FCMToken token, final User user) {
+        user.setFirebaseToken(token.getToken());
+        userRepository.save(user);
+        return ResponseEntity.ok().build();
     }
 
     /**

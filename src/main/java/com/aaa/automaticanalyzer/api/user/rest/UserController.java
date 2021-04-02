@@ -3,6 +3,7 @@ package com.aaa.automaticanalyzer.api.user.rest;
 import com.aaa.automaticanalyzer.api.user.business.UserService;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.common.AuthAwareRestController;
+import com.aaa.automaticanalyzer.model.FCMToken;
 import com.aaa.automaticanalyzer.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,5 +30,10 @@ public class UserController {
     @PutMapping
     public ResponseEntity<Void> changePassword(@RequestBody final PasswordRestInput password, final User user){
        return userService.changePassword(password, user.getDni());
+    }
+
+    @PutMapping("/fcmtoken")
+    public ResponseEntity<Void> insertFCMToken(@RequestBody final FCMToken token, final User user){
+        return userService.setFCMToken(token, user);
     }
 }

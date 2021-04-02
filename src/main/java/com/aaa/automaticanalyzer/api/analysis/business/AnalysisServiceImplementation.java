@@ -4,6 +4,7 @@ import com.aaa.automaticanalyzer.api.analysis.domain.AnalysisRestInput;
 import com.aaa.automaticanalyzer.api.analysis.rest.mapping.AnalysisMapper;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.model.analysis.Analysis;
+import com.aaa.automaticanalyzer.notifications.MessagingService;
 import com.aaa.automaticanalyzer.repository.AnalysisRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class AnalysisServiceImplementation implements AnalysisService {
 
     private final AnalysisRepository analysisRepository;
+    private final MessagingService messagingService;
     private static final String SERVICENAME = "AnalysisService";
 
     @Override
@@ -28,6 +30,8 @@ public class AnalysisServiceImplementation implements AnalysisService {
         analysis.setDate(Calendar.getInstance().getTimeInMillis());
         analysis.setUser(user);
         analysisRepository.save(analysis);
+
+        messagingService.notifyUser(user, "FUNCIONA", "O MATO A GRETA");
         return null;
     }
 

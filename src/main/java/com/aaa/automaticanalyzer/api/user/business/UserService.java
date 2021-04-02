@@ -5,6 +5,7 @@ import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.exceptions.InvalidBirthDate;
 import com.aaa.automaticanalyzer.exceptions.InvalidDNI;
 import com.aaa.automaticanalyzer.exceptions.InvalidMail;
+import com.aaa.automaticanalyzer.model.FCMToken;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 import org.springframework.http.ResponseEntity;
@@ -30,4 +31,6 @@ public interface UserService {
     String hashPassword(String password);
 
     ResponseEntity<Void> changePassword(PasswordRestInput password, String dni);
+
+    ResponseEntity<Void> setFCMToken(FCMToken token, final User user);
 }

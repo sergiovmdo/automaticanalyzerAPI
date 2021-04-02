@@ -17,6 +17,7 @@ public class User {
     private String secondSurname;
     private String birthDate;
     private String phoneNumber;
+    private String firebaseToken;
 
     @ElementCollection
     private List<Disease> userDiseases;
