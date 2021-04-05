@@ -32,8 +32,8 @@ public class AnalysisServiceImplementation implements AnalysisService {
         analysis.setUser(user);
         analysisRepository.save(analysis);
 
-        messagingService.notifyUser(user, "FUNCIONA", "O MATO A GRETA", NotificationType.ANALYSIS);
-        return null;
+        messagingService.notifyUser(user, NotificationType.ANALYSIS.getNotificationTitle(), NotificationType.ANALYSIS.getNotificationBody(), NotificationType.ANALYSIS);
+        return ResponseEntity.ok().build();
     }
 
     @Transactional
