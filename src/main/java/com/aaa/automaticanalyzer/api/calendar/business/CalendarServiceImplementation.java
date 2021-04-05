@@ -11,6 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class CalendarServiceImplementation implements CalendarService {
@@ -26,5 +30,11 @@ public class CalendarServiceImplementation implements CalendarService {
         messagingService.notifyUser(user, NotificationType.CALENDAR.getNotificationTitle(), NotificationType.CALENDAR.getNotificationBody(), NotificationType.CALENDAR);
 
         return ResponseEntity.ok().build();
+    }
+
+    @Transactional
+    @Override
+    public List<Appointment> getAppointments(User user) {
+        return calendarRepository.getAppointments(user.getDni()).collect(Collectors.toList());
     }
 }
