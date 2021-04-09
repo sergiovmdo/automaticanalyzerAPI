@@ -4,11 +4,12 @@ import com.aaa.automaticanalyzer.api.analysis.domain.AnalysisRestInput;
 import com.aaa.automaticanalyzer.model.analysis.Analysis;
 import com.aaa.automaticanalyzer.model.analysis.BaseAnalysis;
 import com.aaa.automaticanalyzer.model.analysis.HyperCholesterolemiaAnalysis;
+import com.aaa.automaticanalyzer.model.analysis.HypothyroidismAnalysis;
 import lombok.SneakyThrows;
 
 public enum Disease {
     DIABETES(HyperCholesterolemiaAnalysis.class),
-    HYPOTHYROIDISM(HyperCholesterolemiaAnalysis.class),
+    HYPOTHYROIDISM(HypothyroidismAnalysis.class),
     TRANSPLANT(HyperCholesterolemiaAnalysis.class),
     HYPERCHOLESTEROLEMIA(HyperCholesterolemiaAnalysis.class);
 

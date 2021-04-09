@@ -13,4 +13,10 @@ public class AnalysisRestInput {
     private String totalCholesterol;
 
     /* End of hypercholesterolemia parameters */
+
+    /* Start of Hypothyroidism parameters */
+
+    private String TSH;
+
+    /* End of Hypothyroidism parameters */
 }

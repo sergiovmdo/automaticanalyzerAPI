@@ -29,6 +29,9 @@ public class User {
     private String token;
     private String password;
 
+    @ManyToMany
+    List<Medication> medications;
+
     public void generateAndSetDiseases() {
         Random random = new Random();
         int quantity = random.nextInt(4) + 1;
@@ -40,6 +43,22 @@ public class User {
         }
 
         userDiseases = diseasesList;
+    }
+
+    public boolean isMedicated(Disease disease){
+        if (medications.size() == 0)
+            return false;
+
+        for (Disease userDisease : userDiseases){
+            if (userDisease.equals(disease)){
+                for (Medication medication: medications){
+                    if (medication.getDisease().equals(disease))
+                        return true;
+                }
+            }
+        }
+
+        return false;
     }
 
 }
