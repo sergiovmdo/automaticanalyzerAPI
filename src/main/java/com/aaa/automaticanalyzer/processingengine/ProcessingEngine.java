@@ -12,9 +12,13 @@ import java.util.List;
 public interface ProcessingEngine {
     public List<Medicine> generateMedication(BaseAnalysis analysis);
 
-    public List<Medicine> increaseMedication(List<Medication> medication);
+    public void increaseMedication(List<Medication> medication);
 
-    public List<Medicine> decreaseMedication(List<Medication> medication);
+    public void decreaseMedication(List<Medication> medication);
 
-    public List<Medicine> modifyMedication(User user, BaseAnalysis analysis);
+    public void modifyMedication(User user, BaseAnalysis analysis);
+
+    public double getNextDose(int currentDose);
+
+    public double getPreviousDose(int currentDose);
 }

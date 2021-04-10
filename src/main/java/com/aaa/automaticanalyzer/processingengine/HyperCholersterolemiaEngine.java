@@ -23,7 +23,7 @@ public class HyperCholersterolemiaEngine implements ProcessingEngine {
     }
 
     @Override
-    public List<Medicine> generateMedication( BaseAnalysis analysis) {
+    public List<Medicine> generateMedication(BaseAnalysis analysis) {
         HyperCholesterolemiaAnalysis hcAnalysis = (HyperCholesterolemiaAnalysis) analysis;
         int desiredDecrease = calculateDesiredCLDLDecrease(hcAnalysis.getCLDL(), hcAnalysis.getMaxCLDL());
         ArrayList<Medicine> medicines = new ArrayList<>();
@@ -45,18 +45,26 @@ public class HyperCholersterolemiaEngine implements ProcessingEngine {
     }
 
     @Override
-    public List<Medicine> decreaseMedication(List<Medication> medication) {
-        return null;
+    public void decreaseMedication(List<Medication> medication) {
     }
 
     @Override
-    public List<Medicine> increaseMedication(List<Medication> medication) {
-        return null;
+    public void increaseMedication(List<Medication> medication) {
+
     }
 
     @Override
-    public List<Medicine> modifyMedication(User user, BaseAnalysis analysis) {
-        return null;
+    public void modifyMedication(User user, BaseAnalysis analysis) {
+    }
+
+    @Override
+    public double getNextDose(int currentDose) {
+        return 0;
+    }
+
+    @Override
+    public double getPreviousDose(int currentDose) {
+        return 0;
     }
 
     private int calculateDesiredCLDLDecrease(String cldl, String maxCLDL) {
