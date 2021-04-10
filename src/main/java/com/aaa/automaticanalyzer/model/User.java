@@ -20,7 +20,7 @@ public class User {
     private String firebaseToken;
 
     @ElementCollection
-    private List<Disease> userDiseases;
+    private List<Disease> diseases;
 
     @Column(unique = true)
     @Id
@@ -42,14 +42,14 @@ public class User {
             diseasesList.add(Disease.values()[disease]);
         }
 
-        userDiseases = diseasesList;
+        diseases = diseasesList;
     }
 
     public boolean isMedicated(Disease disease){
         if (medications.size() == 0)
             return false;
 
-        for (Disease userDisease : userDiseases){
+        for (Disease userDisease : diseases){
             if (userDisease.equals(disease)){
                 for (Medication medication: medications){
                     if (medication.getDisease().equals(disease))

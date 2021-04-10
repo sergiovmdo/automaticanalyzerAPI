@@ -2,9 +2,9 @@ package com.aaa.automaticanalyzer.api.user.business;
 
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.api.user.rest.mapping.UserMapper;
-import com.aaa.automaticanalyzer.model.FCMToken;
-import com.aaa.automaticanalyzer.model.User;
+import com.aaa.automaticanalyzer.model.*;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
+import com.aaa.automaticanalyzer.processingengine.HypothyroidismEngine;
 import com.aaa.automaticanalyzer.repository.UserRepository;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +16,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.Calendar;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +36,7 @@ public class UserServiceImplementation implements UserService {
         String hashedPassword = hashPassword(input.getPassword());
         if (hashedPassword != null)
             user.setPassword(hashedPassword);
+        user.setMedications(getUserMedication(user));
         userRepository.save(user);
 
         return user;
@@ -123,6 +121,45 @@ public class UserServiceImplementation implements UserService {
         user.setFirebaseToken(token.getToken());
         userRepository.save(user);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public List<Medication> getUserMedication(User user) {
+        ArrayList<Medication> medications = new ArrayList<>();
+        for (Disease disease : user.getDiseases()) {
+            if (disease.equals(Disease.HYPOTHYROIDISM)) {
+                Medication medication = getHypothyroidismMedication();
+                medication.setUser(user);
+                medications.add(medication);
+            } else if (disease.equals(Disease.HYPERCHOLESTEROLEMIA)) {
+                Medication medication = getHypercholesterolemiaMedication();
+                medication.setUser(user);
+                medications.add(medication);
+            }
+        }
+
+        return medications;
+    }
+
+    @Override
+    public Medication getHypothyroidismMedication() {
+        Medication medication = new Medication();
+        medication.setDisease(Disease.HYPOTHYROIDISM);
+
+        Medicine medicine = new Medicine();
+        medicine.setMedication(medication);
+        medicine.setName(HypothyroidismEngine.EUTIROX);
+
+        Random random = new Random();
+        int dose = random.nextInt(HypothyroidismEngine.doses.length);
+        medicine.setDose(Double.valueOf(HypothyroidismEngine.doses[dose]));
+
+        return null;
+    }
+
+    @Override
+    public Medication getHypercholesterolemiaMedication() {
+        return null;
     }
 
     /**

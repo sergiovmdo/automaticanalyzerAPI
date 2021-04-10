@@ -4,7 +4,7 @@ import com.aaa.automaticanalyzer.model.Medication;
 import com.aaa.automaticanalyzer.model.Medicine;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.model.analysis.BaseAnalysis;
-import com.aaa.automaticanalyzer.model.analysis.HyperCholesterolemiaAnalysis;
+import com.aaa.automaticanalyzer.model.analysis.HypercholesterolemiaAnalysis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class HyperCholersterolemiaEngine implements ProcessingEngine {
 
     @Override
     public List<Medicine> generateMedication(BaseAnalysis analysis) {
-        HyperCholesterolemiaAnalysis hcAnalysis = (HyperCholesterolemiaAnalysis) analysis;
+        HypercholesterolemiaAnalysis hcAnalysis = (HypercholesterolemiaAnalysis) analysis;
         int desiredDecrease = calculateDesiredCLDLDecrease(hcAnalysis.getCLDL(), hcAnalysis.getMaxCLDL());
         ArrayList<Medicine> medicines = new ArrayList<>();
         if (desiredDecrease >= 55) {

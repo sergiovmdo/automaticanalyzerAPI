@@ -3,9 +3,7 @@ package com.aaa.automaticanalyzer.processingengine;
 import com.aaa.automaticanalyzer.model.Medication;
 import com.aaa.automaticanalyzer.model.Medicine;
 import com.aaa.automaticanalyzer.model.User;
-import com.aaa.automaticanalyzer.model.analysis.Analysis;
 import com.aaa.automaticanalyzer.model.analysis.BaseAnalysis;
-import com.aaa.automaticanalyzer.model.analysis.HyperCholesterolemiaAnalysis;
 
 import java.util.List;
 

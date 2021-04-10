@@ -5,12 +5,15 @@ import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.exceptions.InvalidBirthDate;
 import com.aaa.automaticanalyzer.exceptions.InvalidDNI;
 import com.aaa.automaticanalyzer.exceptions.InvalidMail;
+import com.aaa.automaticanalyzer.model.Disease;
 import com.aaa.automaticanalyzer.model.FCMToken;
+import com.aaa.automaticanalyzer.model.Medication;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 import org.springframework.http.ResponseEntity;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -33,4 +36,10 @@ public interface UserService {
     ResponseEntity<Void> changePassword(PasswordRestInput password, String dni);
 
     ResponseEntity<Void> setFCMToken(FCMToken token, final User user);
+
+    List<Medication> getUserMedication(User user);
+
+    Medication getHypothyroidismMedication();
+
+    Medication getHypercholesterolemiaMedication();
 }

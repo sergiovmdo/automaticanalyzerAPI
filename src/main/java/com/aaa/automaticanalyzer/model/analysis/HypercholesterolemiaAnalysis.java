@@ -7,7 +7,7 @@ import lombok.SneakyThrows;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class HyperCholesterolemiaAnalysis extends BaseAnalysis<HyperCholesterolemiaAnalysis> {
+public class HypercholesterolemiaAnalysis extends BaseAnalysis<HypercholesterolemiaAnalysis> {
 
     private String cLDL;
     private String totalCholesterol;
@@ -16,8 +16,8 @@ public class HyperCholesterolemiaAnalysis extends BaseAnalysis<HyperCholesterole
 
     @SneakyThrows
     @Override
-    public HyperCholesterolemiaAnalysis fromJson(String json) {
-        return om.readValue(json, HyperCholesterolemiaAnalysis.class);
+    public HypercholesterolemiaAnalysis fromJson(String json) {
+        return om.readValue(json, HypercholesterolemiaAnalysis.class);
     }
 
     @Override
