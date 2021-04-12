@@ -4,6 +4,7 @@ import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.api.user.rest.mapping.UserMapper;
 import com.aaa.automaticanalyzer.model.*;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
+import com.aaa.automaticanalyzer.processingengine.HyperCholersterolemiaEngine;
 import com.aaa.automaticanalyzer.processingengine.HypothyroidismEngine;
 import com.aaa.automaticanalyzer.repository.UserRepository;
 import io.jsonwebtoken.*;
@@ -141,6 +142,7 @@ public class UserServiceImplementation implements UserService {
         return medications;
     }
 
+    /* These methods are only used for testing purposes, */
     @Override
     public Medication getHypothyroidismMedication() {
         Medication medication = new Medication();
@@ -153,13 +155,70 @@ public class UserServiceImplementation implements UserService {
         Random random = new Random();
         int dose = random.nextInt(HypothyroidismEngine.doses.length);
         medicine.setDose(Double.valueOf(HypothyroidismEngine.doses[dose]));
+        medication.setMedicines(Arrays.asList(medicine));
 
-        return null;
+        return medication;
     }
 
     @Override
     public Medication getHypercholesterolemiaMedication() {
-        return null;
+        Medication medication = new Medication();
+        medication.setDisease(Disease.HYPERCHOLESTEROLEMIA);
+
+        Medicine medicine = new Medicine();
+        medicine.setMedication(medication);
+
+        Random random = new Random();
+        medicine.setName(HyperCholersterolemiaEngine.HyperCholersterolemiaMedicines.values()[random.nextInt(HyperCholersterolemiaEngine.HyperCholersterolemiaMedicines.values().length)].name());
+
+        switch (medicine.getName()){
+            case "Pravastatina":
+                switch (random.nextInt(2)){
+                    case 0:
+                        medicine.setDose(20d);
+                        break;
+                    case 1:
+                        medicine.setDose(40d);
+                        break;
+                }
+                break;
+            case "Lovastatina":
+                switch (random.nextInt(2)){
+                    case 0:
+                        medicine.setDose(20d);
+                        break;
+                    case 1:
+                        medicine.setDose(40d);
+                        break;
+                }
+                break;
+            case "Simvastatina":
+                switch (random.nextInt(3)){
+                    case 0:
+                        medicine.setDose(10d);
+                        break;
+                    case 1:
+                        medicine.setDose(20d);
+                        break;
+                    case 2:
+                        medicine.setDose(40d);
+                }
+                break;
+            case "Atrovastatina":
+                switch (random.nextInt(2)){
+                    case 0:
+                        medicine.setDose(40d);
+                        break;
+                    case 1:
+                        medicine.setDose(80d);
+                        break;
+                }
+                break;
+        }
+
+        medication.setMedicines(Arrays.asList(medicine));
+
+        return medication;
     }
 
     /**

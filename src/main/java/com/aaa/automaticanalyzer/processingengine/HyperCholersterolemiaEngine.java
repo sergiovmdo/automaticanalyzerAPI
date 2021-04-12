@@ -11,7 +11,7 @@ import java.util.List;
 
 public class HyperCholersterolemiaEngine implements ProcessingEngine {
 
-    private enum HyperCholersterolemiaMedicines {
+    public enum HyperCholersterolemiaMedicines {
         //Only avaiable in 20 or 40mg doses and used to reduce 27% and 34%
         PRAVASTATINA,
         //Only avaiable in 20 or 40mg doses and used to reduce 27% and 34%
