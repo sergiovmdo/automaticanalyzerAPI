@@ -1,6 +1,7 @@
 package com.aaa.automaticanalyzer.api.chat.business;
 
 import com.aaa.automaticanalyzer.api.chat.domain.ChatRestInput;
+import com.aaa.automaticanalyzer.api.chat.domain.ChatRestOutput;
 import com.aaa.automaticanalyzer.api.chat.domain.MessageRestInput;
 import com.aaa.automaticanalyzer.api.chat.rest.mapping.ChatMapper;
 import com.aaa.automaticanalyzer.model.Chat.Chat;
@@ -33,11 +34,11 @@ public class ChatServiceImplementation implements ChatService {
     public ResponseEntity<Chat> createChat(ChatRestInput chatRestInput, final User user) {
         Chat chat = ChatMapper.createChatFromRestInput(chatRestInput);
         chat.setUser(user);
-        chat.setDate(Calendar.getInstance().getTimeInMillis());
+        chat.setCreatedDate(Calendar.getInstance().getTimeInMillis());
         Message message = new Message();
         message.setContent(chatRestInput.getDescription());
         message.setUser(user);
-        message.setDate(Calendar.getInstance().getTimeInMillis());
+        message.setCreatedDate(Calendar.getInstance().getTimeInMillis());
         messageRepository.save(message);
         chat.setMessages(Arrays.asList(message));
         chatRepository.save(chat);
@@ -46,10 +47,10 @@ public class ChatServiceImplementation implements ChatService {
 
     @Override
     public ResponseEntity<Void> createMessage(MessageRestInput messageRestInput, final User user) {
-        Chat chat = getChat(messageRestInput.getChatId());
+        Chat chat = chatRepository.getOne(messageRestInput.getChatId());
         Message message = ChatMapper.createMessageFromRestInput(messageRestInput);
         message.setUser(user);
-        message.setDate(Calendar.getInstance().getTimeInMillis());
+        message.setCreatedDate(Calendar.getInstance().getTimeInMillis());
         messageRepository.save(message);
         chat.getMessages().add(message);
 
@@ -62,8 +63,9 @@ public class ChatServiceImplementation implements ChatService {
     }
 
     @Override
-    public Chat getChat(Long id) {
-        return chatRepository.findById(id).get();
+    public ChatRestOutput getChat(Long id) {
+        Chat chat = chatRepository.findById(id).get();
+        return ChatMapper.createOutputFromChat(chat);
     }
 
     @Override

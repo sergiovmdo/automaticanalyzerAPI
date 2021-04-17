@@ -2,6 +2,7 @@ package com.aaa.automaticanalyzer.api.chat.rest;
 
 import com.aaa.automaticanalyzer.api.chat.business.ChatService;
 import com.aaa.automaticanalyzer.api.chat.domain.ChatRestInput;
+import com.aaa.automaticanalyzer.api.chat.domain.ChatRestOutput;
 import com.aaa.automaticanalyzer.api.chat.domain.MessageRestInput;
 import com.aaa.automaticanalyzer.common.AuthAwareRestController;
 import com.aaa.automaticanalyzer.model.Chat.Chat;
@@ -32,7 +33,7 @@ public class ChatController {
     }
 
     @GetMapping("/{id}")
-    public Chat getChat(@PathVariable("id") Long id){
+    public ChatRestOutput getChat(@PathVariable("id") Long id){
         return chatService.getChat(id);
     }
 

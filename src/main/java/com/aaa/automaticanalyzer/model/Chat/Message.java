@@ -19,5 +19,5 @@ public class Message {
     @ManyToOne
     private User user;
 
-    private long date;
+    private long createdDate;
 }

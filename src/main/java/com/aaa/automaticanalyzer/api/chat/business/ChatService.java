@@ -1,6 +1,7 @@
 package com.aaa.automaticanalyzer.api.chat.business;
 
 import com.aaa.automaticanalyzer.api.chat.domain.ChatRestInput;
+import com.aaa.automaticanalyzer.api.chat.domain.ChatRestOutput;
 import com.aaa.automaticanalyzer.api.chat.domain.MessageRestInput;
 import com.aaa.automaticanalyzer.model.Chat.Chat;
 import com.aaa.automaticanalyzer.model.Chat.SimplifiedChat;
@@ -14,7 +15,7 @@ public interface ChatService {
 
     public ResponseEntity<Void> createMessage(MessageRestInput messageRestInput, final User user);
 
-    public Chat getChat(Long id);
+    public ChatRestOutput getChat(Long id);
 
     public List<SimplifiedChat> getChats(final User user);
 
