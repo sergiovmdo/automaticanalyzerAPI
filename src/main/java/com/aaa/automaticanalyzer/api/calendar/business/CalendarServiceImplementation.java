@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CalendarServiceImplementation implements CalendarService {
     private final CalendarRepository calendarRepository;
     private final MessagingService messagingService;
@@ -32,7 +33,6 @@ public class CalendarServiceImplementation implements CalendarService {
         return ResponseEntity.ok().build();
     }
 
-    @Transactional
     @Override
     public List<Appointment> getAppointments(User user) {
         return calendarRepository.getAppointments(user.getDni()).collect(Collectors.toList());
