@@ -1,11 +1,11 @@
 package com.aaa.automaticanalyzer.api.chat.rest;
 
-import com.aaa.automaticanalyzer.api.calendar.domain.CalendarRestInput;
 import com.aaa.automaticanalyzer.api.chat.business.ChatService;
 import com.aaa.automaticanalyzer.api.chat.domain.ChatRestInput;
 import com.aaa.automaticanalyzer.api.chat.domain.MessageRestInput;
 import com.aaa.automaticanalyzer.common.AuthAwareRestController;
-import com.aaa.automaticanalyzer.model.Chat;
+import com.aaa.automaticanalyzer.model.Chat.Chat;
+import com.aaa.automaticanalyzer.model.Chat.SimplifiedChat;
 import com.aaa.automaticanalyzer.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +37,7 @@ public class ChatController {
     }
 
     @GetMapping
-    public List<Chat> getChats(final User user){
+    public List<SimplifiedChat> getChats(final User user){
         return chatService.getChats(user);
     }
 }

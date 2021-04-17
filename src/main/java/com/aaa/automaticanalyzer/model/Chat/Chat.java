@@ -1,5 +1,7 @@
-package com.aaa.automaticanalyzer.model;
+package com.aaa.automaticanalyzer.model.Chat;
 
+import com.aaa.automaticanalyzer.model.NursingSpeciality;
+import com.aaa.automaticanalyzer.model.User;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,5 +23,7 @@ public class Chat {
 
     @ManyToMany
     private List<Message> messages;
+
+    private long date;
 
 }

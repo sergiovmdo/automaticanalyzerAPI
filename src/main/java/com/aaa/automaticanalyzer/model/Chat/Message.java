@@ -1,5 +1,6 @@
-package com.aaa.automaticanalyzer.model;
+package com.aaa.automaticanalyzer.model.Chat;
 
+import com.aaa.automaticanalyzer.model.User;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,4 +18,6 @@ public class Message {
 
     @ManyToOne
     private User user;
+
+    private long date;
 }

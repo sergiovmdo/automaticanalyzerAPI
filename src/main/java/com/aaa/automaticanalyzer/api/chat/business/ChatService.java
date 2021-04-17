@@ -2,7 +2,8 @@ package com.aaa.automaticanalyzer.api.chat.business;
 
 import com.aaa.automaticanalyzer.api.chat.domain.ChatRestInput;
 import com.aaa.automaticanalyzer.api.chat.domain.MessageRestInput;
-import com.aaa.automaticanalyzer.model.Chat;
+import com.aaa.automaticanalyzer.model.Chat.Chat;
+import com.aaa.automaticanalyzer.model.Chat.SimplifiedChat;
 import com.aaa.automaticanalyzer.model.User;
 import org.springframework.http.ResponseEntity;
 
@@ -15,6 +16,6 @@ public interface ChatService {
 
     public Chat getChat(Long id);
 
-    public List<Chat> getChats(final User user);
+    public List<SimplifiedChat> getChats(final User user);
 
 }

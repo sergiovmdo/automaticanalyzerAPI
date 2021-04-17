@@ -2,11 +2,9 @@ package com.aaa.automaticanalyzer.api.chat.rest.mapping;
 
 import com.aaa.automaticanalyzer.api.chat.domain.ChatRestInput;
 import com.aaa.automaticanalyzer.api.chat.domain.MessageRestInput;
-import com.aaa.automaticanalyzer.model.Chat;
-import com.aaa.automaticanalyzer.model.Message;
+import com.aaa.automaticanalyzer.model.Chat.Chat;
+import com.aaa.automaticanalyzer.model.Chat.Message;
 import com.aaa.automaticanalyzer.model.NursingSpeciality;
-
-import java.util.Arrays;
 
 public class ChatMapper {
     public static Chat createChatFromRestInput(ChatRestInput chatRestInput) {
