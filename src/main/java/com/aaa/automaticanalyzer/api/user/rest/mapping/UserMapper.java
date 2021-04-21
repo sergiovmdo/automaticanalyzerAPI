@@ -1,5 +1,6 @@
 package com.aaa.automaticanalyzer.api.user.rest.mapping;
 
+import com.aaa.automaticanalyzer.model.SimplifiedUser;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 
@@ -16,4 +17,5 @@ public class UserMapper {
 
         return user;
     }
+    
 }

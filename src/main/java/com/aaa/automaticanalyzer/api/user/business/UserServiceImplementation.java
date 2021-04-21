@@ -6,6 +6,8 @@ import com.aaa.automaticanalyzer.model.*;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 import com.aaa.automaticanalyzer.processingengine.HyperCholersterolemiaEngine;
 import com.aaa.automaticanalyzer.processingengine.HypothyroidismEngine;
+import com.aaa.automaticanalyzer.repository.MedicationRepository;
+import com.aaa.automaticanalyzer.repository.MedicineRepository;
 import com.aaa.automaticanalyzer.repository.UserRepository;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,8 @@ import java.util.*;
 public class UserServiceImplementation implements UserService {
 
     private final UserRepository userRepository;
+    private final MedicineRepository medicineRepository;
+    private final MedicationRepository medicationRepository;
     private static final String SERVICENAME = "AAA";
 
     @Value("${oauthKey}")
@@ -35,6 +39,7 @@ public class UserServiceImplementation implements UserService {
         user.generateAndSetDiseases();
         createAndAssociateToken(user);
         String hashedPassword = hashPassword(input.getPassword());
+
         if (hashedPassword != null)
             user.setPassword(hashedPassword);
         user.setMedications(getUserMedication(user));
@@ -53,6 +58,16 @@ public class UserServiceImplementation implements UserService {
                 .parseClaimsJws(token);
 
         return getUserByDNI(jws.getBody().getSubject());
+    }
+
+    @Override
+    public Optional<SimplifiedUser> getSimplifiedUserByDNI(String dni) {
+        User user = userRepository.findById(dni).get();
+        if (user != null){
+            return Optional.of(SimplifiedUser.fromUser(user));
+        }
+
+        return null;
     }
 
     @Override
@@ -128,15 +143,16 @@ public class UserServiceImplementation implements UserService {
     public List<Medication> getUserMedication(User user) {
         ArrayList<Medication> medications = new ArrayList<>();
         for (Disease disease : user.getDiseases()) {
+            Medication medication = null;
             if (disease.equals(Disease.HYPOTHYROIDISM)) {
-                Medication medication = getHypothyroidismMedication();
-                medication.setUser(user);
+                medication = getHypothyroidismMedication();
+
                 medications.add(medication);
             } else if (disease.equals(Disease.HYPERCHOLESTEROLEMIA)) {
-                Medication medication = getHypercholesterolemiaMedication();
-                medication.setUser(user);
+                medication = getHypercholesterolemiaMedication();
                 medications.add(medication);
             }
+
         }
 
         return medications;
@@ -149,13 +165,14 @@ public class UserServiceImplementation implements UserService {
         medication.setDisease(Disease.HYPOTHYROIDISM);
 
         Medicine medicine = new Medicine();
-        medicine.setMedication(medication);
         medicine.setName(HypothyroidismEngine.EUTIROX);
 
         Random random = new Random();
         int dose = random.nextInt(HypothyroidismEngine.doses.length);
         medicine.setDose(Double.valueOf(HypothyroidismEngine.doses[dose]));
         medication.setMedicines(Arrays.asList(medicine));
+        medicineRepository.save(medicine);
+        medicationRepository.save(medication);
 
         return medication;
     }
@@ -166,10 +183,9 @@ public class UserServiceImplementation implements UserService {
         medication.setDisease(Disease.HYPERCHOLESTEROLEMIA);
 
         Medicine medicine = new Medicine();
-        medicine.setMedication(medication);
 
         Random random = new Random();
-        medicine.setName(HyperCholersterolemiaEngine.HyperCholersterolemiaMedicines.values()[random.nextInt(HyperCholersterolemiaEngine.HyperCholersterolemiaMedicines.values().length)].name());
+        medicine.setName(HyperCholersterolemiaEngine.HyperCholersterolemiaMedicines.values()[random.nextInt(HyperCholersterolemiaEngine.HyperCholersterolemiaMedicines.values().length)].getName());
 
         switch (medicine.getName()){
             case "Pravastatina":
@@ -217,6 +233,8 @@ public class UserServiceImplementation implements UserService {
         }
 
         medication.setMedicines(Arrays.asList(medicine));
+        medicineRepository.save(medicine);
+        medicationRepository.save(medication);
 
         return medication;
     }

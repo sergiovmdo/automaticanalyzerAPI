@@ -19,7 +19,4 @@ public class Medication {
 
     private Disease disease;
 
-    @ManyToOne
-    private User user;
-
 }

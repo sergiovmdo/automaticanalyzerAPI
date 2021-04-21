@@ -13,13 +13,23 @@ public class HyperCholersterolemiaEngine implements ProcessingEngine {
 
     public enum HyperCholersterolemiaMedicines {
         //Only avaiable in 20 or 40mg doses and used to reduce 27% and 34%
-        PRAVASTATINA,
+        PRAVASTATINA("Pravastatina"),
         //Only avaiable in 20 or 40mg doses and used to reduce 27% and 34%
-        LOVASTATINA,
+        LOVASTATINA("Lovastatina"),
         //Only avaiable in 10, 20 or 40mg doses and used to reduce 27%, 34% and 41%
-        SIMVASTATINA,
+        SIMVASTATINA("Simvastatina"),
         //Only avaiable in 40 or 80mg doses and used to reduce 48% and 55%
-        ATORVASTATINA;
+        ATORVASTATINA("Atrovastatina");
+
+        private String name;
+
+        HyperCholersterolemiaMedicines(String name){
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 
     @Override

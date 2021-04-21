@@ -12,10 +12,7 @@ public class Medicine {
     @Column(unique = true)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
-
-    @ManyToOne
-    private Medication medication;
+    private long id;
 
     private String name;
 
