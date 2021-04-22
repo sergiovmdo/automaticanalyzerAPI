@@ -12,7 +12,7 @@ public class SimplifiedUser {
     public static SimplifiedUser fromUser(User user){
         SimplifiedUser simplifiedUser = new SimplifiedUser();
         simplifiedUser.setName(user.getName());
-        simplifiedUser.setLanguage("Castellano");
+        simplifiedUser.setLanguage(user.getLanguage().getName());
         simplifiedUser.setMail(user.getMail());
         return simplifiedUser;
     }

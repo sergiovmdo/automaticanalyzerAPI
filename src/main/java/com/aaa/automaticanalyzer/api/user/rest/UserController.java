@@ -1,9 +1,11 @@
 package com.aaa.automaticanalyzer.api.user.rest;
 
 import com.aaa.automaticanalyzer.api.user.business.UserService;
+import com.aaa.automaticanalyzer.api.user.domain.LanguageRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.common.AuthAwareRestController;
 import com.aaa.automaticanalyzer.model.FCMToken;
+import com.aaa.automaticanalyzer.model.SimplifiedUser;
 import com.aaa.automaticanalyzer.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +24,9 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public User getUser(final User user){
+    public SimplifiedUser getUser(final User user){
         //TODO: Map to another objet that does not have the password
-        return user;
+        return SimplifiedUser.fromUser(user);
     }
 
     @PutMapping
@@ -35,5 +37,10 @@ public class UserController {
     @PutMapping("/fcmtoken")
     public ResponseEntity<Void> insertFCMToken(@RequestBody final FCMToken token, final User user){
         return userService.setFCMToken(token, user);
+    }
+
+    @PutMapping("/language")
+    public ResponseEntity<Void> changeLanguage(@RequestBody final LanguageRestInput languageRestInput, final User user){
+        return userService.changeLanguage(languageRestInput, user.getDni());
     }
 }

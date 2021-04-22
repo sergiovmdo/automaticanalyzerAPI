@@ -21,7 +21,7 @@ public class MedicationServiceImplementation implements MedicationService {
         List<Medication> medications = user.getMedications();
         List<MedicationRestOutput> output = new ArrayList<>();
         for (Medication medication : medications){
-            output.add(MedicationMapper.mapMedicationToOutput(medication));
+            output.add(MedicationMapper.mapMedicationToOutput(medication, user.getLanguage()));
         }
         return output;
     }

@@ -1,5 +1,7 @@
 package com.aaa.automaticanalyzer;
 
+import com.aaa.automaticanalyzer.model.Language;
+
 public enum Strings {
     HYPOTHYROIDISM("Hipotiroidismo", "Hipotiroidisme"),
     HYPERCHOLESTEROLEMIA("Hipercolesterolemia", "Hipercolesterolèmia");
@@ -26,5 +28,16 @@ public enum Strings {
                 return Strings.values()[i];
         }
         return null;
+    }
+
+    public String getLanguage(Language language){
+        switch (language){
+            case CATALAN:
+                return catalan;
+            case CASTELLANO:
+                return spanish;
+            default:
+                return spanish;
+        }
     }
 }

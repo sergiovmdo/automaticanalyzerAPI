@@ -28,6 +28,7 @@ public class User {
 
     private String token;
     private String password;
+    private Language language;
 
     @ManyToMany
     List<Medication> medications;

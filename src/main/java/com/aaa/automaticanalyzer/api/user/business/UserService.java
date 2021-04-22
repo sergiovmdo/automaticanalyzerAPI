@@ -1,6 +1,7 @@
 package com.aaa.automaticanalyzer.api.user.business;
 
 
+import com.aaa.automaticanalyzer.api.user.domain.LanguageRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.exceptions.InvalidBirthDate;
 import com.aaa.automaticanalyzer.exceptions.InvalidDNI;
@@ -33,6 +34,8 @@ public interface UserService {
     String hashPassword(String password);
 
     ResponseEntity<Void> changePassword(PasswordRestInput password, String dni);
+
+    ResponseEntity<Void> changeLanguage(LanguageRestInput language, String dni);
 
     ResponseEntity<Void> setFCMToken(FCMToken token, final User user);
 

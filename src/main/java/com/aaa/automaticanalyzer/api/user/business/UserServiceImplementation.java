@@ -1,5 +1,6 @@
 package com.aaa.automaticanalyzer.api.user.business;
 
+import com.aaa.automaticanalyzer.api.user.domain.LanguageRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.api.user.rest.mapping.UserMapper;
 import com.aaa.automaticanalyzer.model.*;
@@ -130,6 +131,20 @@ public class UserServiceImplementation implements UserService {
 
 
         return ResponseEntity.badRequest().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> changeLanguage(LanguageRestInput language, String dni) {
+        Optional<User> user = userRepository.findById(dni);
+        if (user.isPresent()) {
+            final User u = user.get();
+            u.setLanguage(Language.getFromString(language.getLanguage()));
+            userRepository.save(u);
+            return ResponseEntity.ok(null);
+        } else {
+            //TODO: ERROR TREATMENT
+        }
+        return null;
     }
 
     @Override
