@@ -27,7 +27,7 @@ public interface UserService {
 
     Optional<User> getUserByDNI(final String dni);
 
-    SimplifiedUser getSimplifiedUserByDNI(final String dni);
+    SimplifiedUser getSimplifiedUserByDNI(final User user);
 
     String hashPassword(String password);
 

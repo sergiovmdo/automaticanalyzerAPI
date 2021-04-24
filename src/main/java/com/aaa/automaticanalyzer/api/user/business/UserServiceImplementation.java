@@ -63,7 +63,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public SimplifiedUser getSimplifiedUserByDNI(String dni) {
+    public SimplifiedUser getSimplifiedUserByDNI(final User user) {
         return SimplifiedUser.fromUser(user);
     }
 

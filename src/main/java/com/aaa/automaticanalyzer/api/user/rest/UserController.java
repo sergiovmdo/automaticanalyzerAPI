@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping
     public SimplifiedUser getUser(final User user) {
-        return userService.getSimplifiedUserByDNI(user.getDni());
+        return userService.getSimplifiedUserByDNI(user);
     }
 
     @PutMapping
