@@ -29,7 +29,7 @@ public class AuthHandler
         try {
             userService.validateToken(token).ifPresent(model::addAttribute);
         } catch (Exception e){
-
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
 }

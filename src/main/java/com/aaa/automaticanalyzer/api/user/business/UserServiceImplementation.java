@@ -3,6 +3,8 @@ package com.aaa.automaticanalyzer.api.user.business;
 import com.aaa.automaticanalyzer.api.user.domain.LanguageRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.api.user.rest.mapping.UserMapper;
+import com.aaa.automaticanalyzer.exceptions.InvalidPassword;
+import com.aaa.automaticanalyzer.exceptions.UserNotFound;
 import com.aaa.automaticanalyzer.model.*;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 import com.aaa.automaticanalyzer.processingengine.HyperCholersterolemiaEngine;
@@ -50,8 +52,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public Optional<User> validateToken(String token)
-            throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException {
+    public Optional<User> validateToken(String token) {
         Jws<Claims> jws = Jwts.parserBuilder()
                 .setSigningKey(getSecretKey())
                 .requireIssuer(SERVICENAME)
@@ -62,13 +63,8 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public Optional<SimplifiedUser> getSimplifiedUserByDNI(String dni) {
-        User user = userRepository.findById(dni).get();
-        if (user != null){
-            return Optional.of(SimplifiedUser.fromUser(user));
-        }
-
-        return null;
+    public SimplifiedUser getSimplifiedUserByDNI(String dni) {
+        return SimplifiedUser.fromUser(user);
     }
 
     @Override
@@ -114,23 +110,14 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public ResponseEntity<Void> changePassword(PasswordRestInput password, String dni) {
-        Optional<User> user = userRepository.findById(dni);
-        if (user.isPresent()) {
-            //TODO: Treat all the API errors
-            final User u = user.get();
-            if (hashPassword(password.getCurrentPassword()).equals(u.getPassword())) {
-                String hashedPassword = hashPassword(password.getPassword());
-                u.setPassword(hashedPassword);
-                userRepository.save(u);
-                return ResponseEntity.ok(null);
-            } else {
-                //TODO: La contraseña no es correcta
-            }
+    public void changePassword(PasswordRestInput password, final User user) throws InvalidPassword {
+        if (hashPassword(password.getCurrentPassword()).equals(user.getPassword())) {
+            String hashedPassword = hashPassword(password.getPassword());
+            user.setPassword(hashedPassword);
+            userRepository.save(user);
+        } else {
+            throw new InvalidPassword();
         }
-
-
-        return ResponseEntity.badRequest().build();
     }
 
     @Override
@@ -202,9 +189,9 @@ public class UserServiceImplementation implements UserService {
         Random random = new Random();
         medicine.setName(HyperCholersterolemiaEngine.HyperCholersterolemiaMedicines.values()[random.nextInt(HyperCholersterolemiaEngine.HyperCholersterolemiaMedicines.values().length)].getName());
 
-        switch (medicine.getName()){
+        switch (medicine.getName()) {
             case "Pravastatina":
-                switch (random.nextInt(2)){
+                switch (random.nextInt(2)) {
                     case 0:
                         medicine.setDose(20d);
                         break;
@@ -214,7 +201,7 @@ public class UserServiceImplementation implements UserService {
                 }
                 break;
             case "Lovastatina":
-                switch (random.nextInt(2)){
+                switch (random.nextInt(2)) {
                     case 0:
                         medicine.setDose(20d);
                         break;
@@ -224,7 +211,7 @@ public class UserServiceImplementation implements UserService {
                 }
                 break;
             case "Simvastatina":
-                switch (random.nextInt(3)){
+                switch (random.nextInt(3)) {
                     case 0:
                         medicine.setDose(10d);
                         break;
@@ -236,7 +223,7 @@ public class UserServiceImplementation implements UserService {
                 }
                 break;
             case "Atrovastatina":
-                switch (random.nextInt(2)){
+                switch (random.nextInt(2)) {
                     case 0:
                         medicine.setDose(40d);
                         break;

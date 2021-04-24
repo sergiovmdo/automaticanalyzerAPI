@@ -3,9 +3,7 @@ package com.aaa.automaticanalyzer.api.user.business;
 
 import com.aaa.automaticanalyzer.api.user.domain.LanguageRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
-import com.aaa.automaticanalyzer.exceptions.InvalidBirthDate;
-import com.aaa.automaticanalyzer.exceptions.InvalidDNI;
-import com.aaa.automaticanalyzer.exceptions.InvalidMail;
+import com.aaa.automaticanalyzer.exceptions.*;
 import com.aaa.automaticanalyzer.model.*;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 import org.springframework.http.ResponseEntity;
@@ -29,11 +27,11 @@ public interface UserService {
 
     Optional<User> getUserByDNI(final String dni);
 
-    Optional<SimplifiedUser> getSimplifiedUserByDNI(final String dni);
+    SimplifiedUser getSimplifiedUserByDNI(final String dni);
 
     String hashPassword(String password);
 
-    ResponseEntity<Void> changePassword(PasswordRestInput password, String dni);
+    void changePassword(PasswordRestInput password, final User user) throws InvalidPassword;
 
     ResponseEntity<Void> changeLanguage(LanguageRestInput language, String dni);
 
