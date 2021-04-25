@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface CalendarService {
-    public ResponseEntity<Void> addAppointment(CalendarRestInput calendarRestInput, final User user);
+    public void addAppointment(CalendarRestInput calendarRestInput, final User user);
 
     public List<Appointment> getAppointments(final User user);
 }

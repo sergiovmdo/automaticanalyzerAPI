@@ -23,14 +23,12 @@ public class CalendarServiceImplementation implements CalendarService {
     private final MessagingService messagingService;
 
     @Override
-    public ResponseEntity<Void> addAppointment(CalendarRestInput calendarRestInput, User user) {
+    public void addAppointment(CalendarRestInput calendarRestInput, User user) {
         Appointment appointment = CalendarMapper.createAppointmentFromRestInput(calendarRestInput);
         appointment.setUser(user);
         calendarRepository.save(appointment);
 
         messagingService.notifyUser(user, NotificationType.CALENDAR.getNotificationTitle(), NotificationType.CALENDAR.getNotificationBody(), NotificationType.CALENDAR);
-
-        return ResponseEntity.ok().build();
     }
 
     @Override

@@ -24,8 +24,8 @@ public class CalendarController {
     private final CalendarService calendarService;
 
     @PostMapping
-    public ResponseEntity<Void> addCalendarAppointment(@RequestBody final CalendarRestInput calendarRestInput, final User user){
-        return calendarService.addAppointment(calendarRestInput, user);
+    public void addCalendarAppointment(@RequestBody final CalendarRestInput calendarRestInput, final User user){
+        calendarService.addAppointment(calendarRestInput, user);
     }
 
     @GetMapping

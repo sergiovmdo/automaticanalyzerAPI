@@ -53,14 +53,17 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public Optional<User> validateToken(String token) {
+    public Optional<User> validateToken(String token) throws UserNotFound{
         Jws<Claims> jws = Jwts.parserBuilder()
                 .setSigningKey(getSecretKey())
                 .requireIssuer(SERVICENAME)
                 .build()
                 .parseClaimsJws(token);
 
-        return getUserByDNI(jws.getBody().getSubject());
+        Optional<User> user = getUserByDNI(jws.getBody().getSubject());
+        if (user.isPresent())
+            return user;
+        throw new UserNotFound();
     }
 
     @Override

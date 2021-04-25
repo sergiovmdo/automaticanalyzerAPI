@@ -25,7 +25,7 @@ public interface UserService {
      */
     User createUser(final UserRestInput input);
 
-    Optional<User> validateToken(String token);
+    Optional<User> validateToken(String token) throws UserNotFound;
 
     Optional<User> getUserByDNI(final String dni);
 
