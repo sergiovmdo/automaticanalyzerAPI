@@ -14,7 +14,7 @@ public interface ProcessingEngine {
 
     public void decreaseMedication(List<Medication> medication);
 
-    public void modifyMedication(User user, BaseAnalysis analysis);
+    public boolean modifyMedication(User user, BaseAnalysis analysis);
 
     public double getNextDose(int currentDose);
 

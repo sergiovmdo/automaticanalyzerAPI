@@ -2,6 +2,7 @@ package com.aaa.automaticanalyzer.api.user.business;
 
 
 import com.aaa.automaticanalyzer.api.user.domain.LanguageRestInput;
+import com.aaa.automaticanalyzer.api.user.domain.LoginRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.exceptions.*;
 import com.aaa.automaticanalyzer.model.*;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public interface UserService {
     /**
      * Creates a new user from the given information.
+     *
      * @param input Data to create the new user.
      * @return Created user.
      * @throws InvalidDNI
@@ -33,13 +35,15 @@ public interface UserService {
 
     void changePassword(PasswordRestInput password, final User user) throws InvalidPassword;
 
-    ResponseEntity<Void> changeLanguage(LanguageRestInput language, String dni);
+    void changeLanguage(LanguageRestInput language, final User user);
 
-    ResponseEntity<Void> setFCMToken(FCMToken token, final User user);
+    void setFCMToken(FCMToken token, final User user);
 
     List<Medication> getUserMedication(User user);
 
     Medication getHypothyroidismMedication();
 
     Medication getHypercholesterolemiaMedication();
+
+    String login(LoginRestInput loginRestInput) throws UserNotFound, InvalidPassword;
 }

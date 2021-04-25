@@ -64,7 +64,8 @@ public class HyperCholersterolemiaEngine implements ProcessingEngine {
     }
 
     @Override
-    public void modifyMedication(User user, BaseAnalysis analysis) {
+    public boolean modifyMedication(User user, BaseAnalysis analysis) {
+        return false;
     }
 
     @Override

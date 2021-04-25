@@ -1,6 +1,7 @@
 package com.aaa.automaticanalyzer.api.user.business;
 
 import com.aaa.automaticanalyzer.api.user.domain.LanguageRestInput;
+import com.aaa.automaticanalyzer.api.user.domain.LoginRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.api.user.rest.mapping.UserMapper;
 import com.aaa.automaticanalyzer.exceptions.InvalidPassword;
@@ -121,24 +122,15 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public ResponseEntity<Void> changeLanguage(LanguageRestInput language, String dni) {
-        Optional<User> user = userRepository.findById(dni);
-        if (user.isPresent()) {
-            final User u = user.get();
-            u.setLanguage(Language.getFromString(language.getLanguage()));
-            userRepository.save(u);
-            return ResponseEntity.ok(null);
-        } else {
-            //TODO: ERROR TREATMENT
-        }
-        return null;
+    public void changeLanguage(LanguageRestInput language, final User user) {
+        user.setLanguage(Language.getFromString(language.getLanguage()));
+        userRepository.save(user);
     }
 
     @Override
-    public ResponseEntity<Void> setFCMToken(FCMToken token, final User user) {
+    public void setFCMToken(FCMToken token, final User user) {
         user.setFirebaseToken(token.getToken());
         userRepository.save(user);
-        return ResponseEntity.ok().build();
     }
 
     @Override
@@ -239,6 +231,22 @@ public class UserServiceImplementation implements UserService {
         medicationRepository.save(medication);
 
         return medication;
+    }
+
+    @Override
+    public String login(LoginRestInput loginRestInput) throws UserNotFound, InvalidPassword {
+        Optional<User> user = getUserByDNI(loginRestInput.getDni());
+
+        if (user.isPresent()) {
+            String password = hashPassword(loginRestInput.getPassword());
+            if (password.equals(user.get().getPassword()))
+                return user.get().getToken();
+            else {
+                throw new InvalidPassword();
+            }
+        } else {
+            throw new UserNotFound();
+        }
     }
 
     /**

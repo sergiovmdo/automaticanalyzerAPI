@@ -42,12 +42,12 @@ public class UserController {
     }
 
     @PutMapping("/fcmtoken")
-    public ResponseEntity<Void> insertFCMToken(@RequestBody final FCMToken token, final User user) {
-        return userService.setFCMToken(token, user);
+    public void insertFCMToken(@RequestBody final FCMToken token, final User user) {
+        userService.setFCMToken(token, user);
     }
 
     @PutMapping("/language")
-    public ResponseEntity<Void> changeLanguage(@RequestBody final LanguageRestInput languageRestInput, final User user) {
-        return userService.changeLanguage(languageRestInput, user.getDni());
+    public void changeLanguage(@RequestBody final LanguageRestInput languageRestInput, final User user) {
+         userService.changeLanguage(languageRestInput, user);
     }
 }

@@ -5,18 +5,25 @@ import com.aaa.automaticanalyzer.model.analysis.Analysis;
 import com.aaa.automaticanalyzer.model.analysis.BaseAnalysis;
 import com.aaa.automaticanalyzer.model.analysis.HypercholesterolemiaAnalysis;
 import com.aaa.automaticanalyzer.model.analysis.HypothyroidismAnalysis;
+import com.aaa.automaticanalyzer.processingengine.HyperCholersterolemiaEngine;
+import com.aaa.automaticanalyzer.processingengine.HypothyroidismEngine;
+import com.aaa.automaticanalyzer.processingengine.ProcessingEngine;
 import lombok.SneakyThrows;
 
 public enum Disease {
-    DIABETES(HypercholesterolemiaAnalysis.class),
-    HYPOTHYROIDISM(HypothyroidismAnalysis.class),
-    TRANSPLANT(HypercholesterolemiaAnalysis.class),
-    HYPERCHOLESTEROLEMIA(HypercholesterolemiaAnalysis.class);
+    HYPOTHYROIDISM(HypothyroidismAnalysis.class, new HypothyroidismEngine()),
+    HYPERCHOLESTEROLEMIA(HypercholesterolemiaAnalysis.class, new HyperCholersterolemiaEngine());
 
     private Class<? extends BaseAnalysis> data;
+    private ProcessingEngine engine;
 
-    Disease(final Class<? extends BaseAnalysis> data) {
+    Disease(final Class<? extends BaseAnalysis> data, ProcessingEngine engine) {
         this.data = data;
+        this.engine = engine;
+    }
+
+    public ProcessingEngine getEngine() {
+        return engine;
     }
 
     @SneakyThrows

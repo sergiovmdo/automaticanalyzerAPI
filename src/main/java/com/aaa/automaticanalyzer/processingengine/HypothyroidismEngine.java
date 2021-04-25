@@ -53,15 +53,20 @@ public class HypothyroidismEngine implements ProcessingEngine {
     }
 
     @Override
-    public void modifyMedication(User user, BaseAnalysis analysis) {
+    public boolean modifyMedication(User user, BaseAnalysis analysis) {
         HypothyroidismAnalysis htAnalysis = (HypothyroidismAnalysis) analysis;
         if (Double.parseDouble(htAnalysis.getTSH()) > Double.parseDouble(htAnalysis.getMaxTSH())) {
-            if (user.isMedicated(Disease.HYPOTHYROIDISM))
+            if (user.isMedicated(Disease.HYPOTHYROIDISM)) {
                 increaseMedication(user.getMedications());
+                return true;
+            }
         } else if (Double.parseDouble(htAnalysis.getTSH()) < Double.parseDouble(htAnalysis.getMinTSH())) {
-            if (user.isMedicated(Disease.HYPOTHYROIDISM))
+            if (user.isMedicated(Disease.HYPOTHYROIDISM)) {
                 decreaseMedication(user.getMedications());
+                return true;
+            }
         }
+        return false;
     }
 
 

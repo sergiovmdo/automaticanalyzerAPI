@@ -24,8 +24,8 @@ public class AnalysisController {
     private final AnalysisService analysisService;
 
     @PostMapping
-    public ResponseEntity<Void> addBloodAnalysis(@RequestBody final AnalysisRestInput analysis, final User user){
-        return analysisService.addBloodAnalysis(analysis, user);
+    public void addBloodAnalysis(@RequestBody final AnalysisRestInput analysis, final User user){
+        analysisService.addBloodAnalysis(analysis, user);
     }
 
     @GetMapping

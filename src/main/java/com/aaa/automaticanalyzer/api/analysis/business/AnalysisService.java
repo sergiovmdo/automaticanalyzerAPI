@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface AnalysisService {
-    public ResponseEntity<Void> addBloodAnalysis(AnalysisRestInput analysis, final User user);
+    public void addBloodAnalysis(AnalysisRestInput analysis, final User user);
 
     public List<Analysis> getAnalysis(final User user);
 
