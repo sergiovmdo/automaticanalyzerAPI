@@ -23,7 +23,7 @@ public interface UserService {
      * @throws InvalidMail
      * @throws InvalidBirthDate
      */
-    User createUser(final UserRestInput input);
+    User createUser(final UserRestInput input) throws UserAlreadyExists;
 
     Optional<User> validateToken(String token) throws UserNotFound;
 

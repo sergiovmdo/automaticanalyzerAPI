@@ -35,11 +35,11 @@ public class User {
 
     public void generateAndSetDiseases() {
         Random random = new Random();
-        int quantity = random.nextInt(4) + 1;
+        int quantity = random.nextInt(2) + 1;
         List<Disease> diseasesList = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
-            int disease = random.nextInt(4);
+            int disease = random.nextInt(2);
             diseasesList.add(Disease.values()[disease]);
         }
 

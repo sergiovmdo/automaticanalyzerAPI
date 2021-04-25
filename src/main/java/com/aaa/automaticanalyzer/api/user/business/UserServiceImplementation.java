@@ -5,6 +5,7 @@ import com.aaa.automaticanalyzer.api.user.domain.LoginRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.api.user.rest.mapping.UserMapper;
 import com.aaa.automaticanalyzer.exceptions.InvalidPassword;
+import com.aaa.automaticanalyzer.exceptions.UserAlreadyExists;
 import com.aaa.automaticanalyzer.exceptions.UserNotFound;
 import com.aaa.automaticanalyzer.model.*;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
@@ -38,18 +39,22 @@ public class UserServiceImplementation implements UserService {
     private String tokenKey;
 
     @Override
-    public User createUser(UserRestInput input) {
-        User user = UserMapper.createUserFromRestInput(input);
-        user.generateAndSetDiseases();
-        createAndAssociateToken(user);
-        String hashedPassword = hashPassword(input.getPassword());
+    public User createUser(UserRestInput input) throws UserAlreadyExists {
+        if (!userRepository.findById(input.getDni()).isPresent()) {
+            User user = UserMapper.createUserFromRestInput(input);
+            user.generateAndSetDiseases();
+            createAndAssociateToken(user);
+            String hashedPassword = hashPassword(input.getPassword());
 
-        if (hashedPassword != null)
-            user.setPassword(hashedPassword);
-        user.setMedications(getUserMedication(user));
-        userRepository.save(user);
+            if (hashedPassword != null)
+                user.setPassword(hashedPassword);
+            user.setMedications(getUserMedication(user));
+            userRepository.save(user);
 
-        return user;
+            return user;
+        } else {
+            throw new UserAlreadyExists();
+        }
     }
 
     @Override
