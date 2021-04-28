@@ -1,8 +1,12 @@
 package com.aaa.automaticanalyzer.api.calendar.business;
 
 import com.aaa.automaticanalyzer.api.calendar.domain.CalendarRestInput;
+import com.aaa.automaticanalyzer.api.calendar.domain.CalendarRestOutput;
 import com.aaa.automaticanalyzer.api.calendar.rest.mapping.CalendarMapper;
+import com.aaa.automaticanalyzer.api.medication.domain.MedicationRestOutput;
+import com.aaa.automaticanalyzer.api.medication.rest.mapping.MedicationMapper;
 import com.aaa.automaticanalyzer.model.Appointment;
+import com.aaa.automaticanalyzer.model.Medication;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.notifications.MessagingService;
 import com.aaa.automaticanalyzer.notifications.NotificationType;
@@ -12,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +37,13 @@ public class CalendarServiceImplementation implements CalendarService {
     }
 
     @Override
-    public List<Appointment> getAppointments(User user) {
-        return calendarRepository.getAppointments(user.getDni()).collect(Collectors.toList());
+    public List<CalendarRestOutput> getAppointments(User user) {
+        List<Appointment> appointments = calendarRepository.getAppointments(user.getDni()).collect(Collectors.toList());
+        List<CalendarRestOutput> output = new ArrayList<>();
+        for (Appointment appointment : appointments){
+            output.add(CalendarMapper.mapAppointmentToOutput(appointment, user.getLanguage()));
+        }
+
+        return output;
     }
 }

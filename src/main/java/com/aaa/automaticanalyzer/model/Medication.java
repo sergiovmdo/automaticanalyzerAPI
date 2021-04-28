@@ -19,4 +19,5 @@ public class Medication {
 
     private Disease disease;
 
+    private boolean needsRevision = false;
 }

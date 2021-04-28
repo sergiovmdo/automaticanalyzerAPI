@@ -16,7 +16,7 @@ public interface ProcessingEngine {
 
     public boolean modifyMedication(User user, BaseAnalysis analysis);
 
-    public double getNextDose(int currentDose);
+    public double getNextDose(int currentDose, String medicineName);
 
-    public double getPreviousDose(int currentDose);
+    public double getPreviousDose(int currentDose, String medicineName);
 }

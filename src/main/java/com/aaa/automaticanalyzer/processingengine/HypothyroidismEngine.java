@@ -36,7 +36,7 @@ public class HypothyroidismEngine implements ProcessingEngine {
             if (m.getDisease().equals(Disease.HYPOTHYROIDISM)) {
                 //Only one medicine, eutirox
                 Medicine medicine = m.getMedicines().get(0);
-                medicine.setDose(getNextDose(medicine.getDose().intValue()));
+                medicine.setDose(getNextDose(medicine.getDose().intValue(), null));
             }
         }
     }
@@ -47,7 +47,7 @@ public class HypothyroidismEngine implements ProcessingEngine {
             if (m.getDisease().equals(Disease.HYPOTHYROIDISM)) {
                 //Only one medicine, eutirox
                 Medicine medicine = m.getMedicines().get(0);
-                medicine.setDose(getPreviousDose(medicine.getDose().intValue()));
+                medicine.setDose(getPreviousDose(medicine.getDose().intValue(), null));
             }
         }
     }
@@ -71,7 +71,7 @@ public class HypothyroidismEngine implements ProcessingEngine {
 
 
     @Override
-    public double getNextDose(int currentDose) {
+    public double getNextDose(int currentDose, String medicineName) {
         switch (currentDose) {
             case 25:
                 return 50d;
@@ -99,7 +99,7 @@ public class HypothyroidismEngine implements ProcessingEngine {
     }
 
     @Override
-    public double getPreviousDose(int currentDose) {
+    public double getPreviousDose(int currentDose, String medicineName) {
         switch (currentDose) {
             case 50:
                 return 25d;

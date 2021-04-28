@@ -1,7 +1,11 @@
 package com.aaa.automaticanalyzer.api.analysis.business;
 
 import com.aaa.automaticanalyzer.api.analysis.domain.AnalysisRestInput;
+import com.aaa.automaticanalyzer.api.analysis.domain.AnalysisRestOutput;
 import com.aaa.automaticanalyzer.api.analysis.rest.mapping.AnalysisMapper;
+import com.aaa.automaticanalyzer.api.calendar.domain.CalendarRestOutput;
+import com.aaa.automaticanalyzer.api.calendar.rest.mapping.CalendarMapper;
+import com.aaa.automaticanalyzer.model.Appointment;
 import com.aaa.automaticanalyzer.model.Medication;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.model.analysis.Analysis;
@@ -14,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +42,9 @@ public class AnalysisServiceImplementation implements AnalysisService {
         if (medicationModified) {
             for (Medication medication : user.getMedications()) {
                 medicationRepository.save(medication);
+                if (medication.isNeedsRevision()){
+                    messagingService.notifyUser(user, NotificationType.REVISION.getNotificationTitle(), NotificationType.REVISION.getNotificationBody(), NotificationType.REVISION);
+                }
             }
         }
         messagingService.notifyUser(user, NotificationType.ANALYSIS.getNotificationTitle(), NotificationType.ANALYSIS.getNotificationBody(), NotificationType.ANALYSIS);
@@ -44,7 +52,13 @@ public class AnalysisServiceImplementation implements AnalysisService {
 
     @Transactional
     @Override
-    public List<Analysis> getAnalysis(User user) {
-        return analysisRepository.getAnalysis(user.getDni()).collect(Collectors.toList());
+    public List<AnalysisRestOutput> getAnalysis(User user) {
+        List<Analysis> analyses = analysisRepository.getAnalysis(user.getDni()).collect(Collectors.toList());
+        List<AnalysisRestOutput> output = new ArrayList<>();
+        for (Analysis analysis : analyses){
+            output.add(AnalysisMapper.mapAnalysisToOutput(analysis, user.getLanguage()));
+        }
+
+        return output;
     }
 }

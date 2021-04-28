@@ -42,19 +42,20 @@ public class User {
 
         for (int i = 0; i < quantity; i++) {
             int disease = random.nextInt(2);
-            diseasesList.add(Disease.values()[disease]);
+            if (!diseasesList.contains(Disease.values()[disease]))
+                diseasesList.add(Disease.values()[disease]);
         }
 
         diseases = diseasesList;
     }
 
-    public boolean isMedicated(Disease disease){
+    public boolean isMedicated(Disease disease) {
         if (medications.size() == 0)
             return false;
 
-        for (Disease userDisease : diseases){
-            if (userDisease.equals(disease)){
-                for (Medication medication: medications){
+        for (Disease userDisease : diseases) {
+            if (userDisease.equals(disease)) {
+                for (Medication medication : medications) {
                     if (medication.getDisease().equals(disease))
                         return true;
                 }

@@ -2,6 +2,7 @@ package com.aaa.automaticanalyzer.api.calendar.rest;
 
 import com.aaa.automaticanalyzer.api.calendar.business.CalendarService;
 import com.aaa.automaticanalyzer.api.calendar.domain.CalendarRestInput;
+import com.aaa.automaticanalyzer.api.calendar.domain.CalendarRestOutput;
 import com.aaa.automaticanalyzer.common.AuthAwareRestController;
 import com.aaa.automaticanalyzer.model.Appointment;
 import com.aaa.automaticanalyzer.model.User;
@@ -26,7 +27,7 @@ public class CalendarController {
     }
 
     @GetMapping
-    List<Appointment> getAppointments(final User user){
+    List<CalendarRestOutput> getAppointments(final User user){
         return calendarService.getAppointments(user);
     }
 
