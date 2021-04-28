@@ -23,7 +23,7 @@ public class HyperCholersterolemiaEngine implements ProcessingEngine {
 
         private String name;
 
-        HyperCholersterolemiaMedicines(String name){
+        HyperCholersterolemiaMedicines(String name) {
             this.name = name;
         }
 

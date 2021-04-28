@@ -56,7 +56,7 @@ public class ChatServiceImplementation implements ChatService {
 
         chatRepository.save(chat);
         if (!chat.getUser().equals(user)) {
-            messagingService.notifyUser(chat.getUser(), NotificationType.CHAT.getNotificationTitle(), message.getContent(), NotificationType.CHAT);
+            messagingService.notifyNewChatMessage(chat.getUser(), message, chat.getId());
         }
 
         return ResponseEntity.ok(null);

@@ -18,5 +18,4 @@ public interface ChatService {
     public ChatRestOutput getChat(Long id);
 
     public List<SimplifiedChat> getChats(final User user);
-
 }

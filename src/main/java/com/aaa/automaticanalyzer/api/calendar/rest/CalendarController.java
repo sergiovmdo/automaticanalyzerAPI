@@ -8,15 +8,12 @@ import com.aaa.automaticanalyzer.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/calendar")
 @AllArgsConstructor
 @AuthAwareRestController

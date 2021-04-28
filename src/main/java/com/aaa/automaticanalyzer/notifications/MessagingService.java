@@ -29,4 +29,21 @@ public class MessagingService {
             }
         }
     }
+
+    @Async
+    public void notifyNewChatMessage(final User user, com.aaa.automaticanalyzer.model.Chat.Message message, Long chatId) {
+        if (user.getFirebaseToken() != null) {
+            try {
+                Message notification = Message.builder().setToken(user.getFirebaseToken())
+                        .putData("content", message.getContent())
+                        .putData("user", user.getName())
+                        .putData("chatId", String.valueOf(chatId))
+                        .putData("category", NotificationType.CHAT.name())
+                        .build();
+                FirebaseMessaging.getInstance().send(notification);
+            } catch (FirebaseMessagingException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

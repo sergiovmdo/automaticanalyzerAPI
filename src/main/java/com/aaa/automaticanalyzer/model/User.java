@@ -17,6 +17,8 @@ public class User {
     private String secondSurname;
     private String birthDate;
     private String phoneNumber;
+
+    @Column(columnDefinition = "text")
     private String firebaseToken;
 
     @ElementCollection
