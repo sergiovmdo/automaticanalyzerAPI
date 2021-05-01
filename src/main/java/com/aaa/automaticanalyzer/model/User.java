@@ -1,5 +1,6 @@
 package com.aaa.automaticanalyzer.model;
 
+import com.aaa.automaticanalyzer.model.analysis.Analysis;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -34,6 +35,12 @@ public class User {
 
     @ManyToMany
     List<Medication> medications;
+
+    @ManyToMany
+    List<Appointment> appointments;
+
+    @ManyToMany
+    List<Analysis> analyses;
 
     public void generateAndSetDiseases() {
         Random random = new Random();

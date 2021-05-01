@@ -30,7 +30,7 @@ public class CalendarServiceImplementation implements CalendarService {
     @Override
     public void addAppointment(CalendarRestInput calendarRestInput, User user) {
         Appointment appointment = CalendarMapper.createAppointmentFromRestInput(calendarRestInput);
-        appointment.setUser(user);
+        user.getAppointments().add(appointment);
         calendarRepository.save(appointment);
 
         messagingService.notifyUser(user, NotificationType.CALENDAR.getNotificationTitle(), NotificationType.CALENDAR.getNotificationBody(), NotificationType.CALENDAR);
@@ -38,7 +38,7 @@ public class CalendarServiceImplementation implements CalendarService {
 
     @Override
     public List<CalendarRestOutput> getAppointments(User user) {
-        List<Appointment> appointments = calendarRepository.getAppointments(user.getDni()).collect(Collectors.toList());
+        List<Appointment> appointments = user.getAppointments();
         List<CalendarRestOutput> output = new ArrayList<>();
         for (Appointment appointment : appointments){
             output.add(CalendarMapper.mapAppointmentToOutput(appointment, user.getLanguage()));

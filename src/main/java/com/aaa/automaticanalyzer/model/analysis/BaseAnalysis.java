@@ -1,6 +1,7 @@
 package com.aaa.automaticanalyzer.model.analysis;
 
 import com.aaa.automaticanalyzer.api.analysis.domain.AnalysisRestInput;
+import com.aaa.automaticanalyzer.model.Language;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 
@@ -16,4 +17,6 @@ public abstract class BaseAnalysis<T> {
     public abstract BaseAnalysis<T> fromJson(final String json);
 
     public abstract void parseInput(final AnalysisRestInput analysisRestInput);
+
+    public abstract String formatContent(String content, Language language);
 }

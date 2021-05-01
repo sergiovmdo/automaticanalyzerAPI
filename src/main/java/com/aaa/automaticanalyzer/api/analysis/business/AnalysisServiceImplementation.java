@@ -36,7 +36,7 @@ public class AnalysisServiceImplementation implements AnalysisService {
         Analysis analysis = AnalysisMapper.createAnalysisFromRestInput(analysisRestInput);
         analysis.getDisease().addAnalysisData(analysis, analysisRestInput);
         analysis.setDate(Calendar.getInstance().getTimeInMillis());
-        analysis.setUser(user);
+        user.getAnalyses().add(analysis);
         analysisRepository.save(analysis);
         boolean medicationModified = analysis.getDisease().getEngine().modifyMedication(user, analysis.getDisease().getAnalisis(analysis.getAnalysisData()));
         if (medicationModified) {
@@ -53,7 +53,7 @@ public class AnalysisServiceImplementation implements AnalysisService {
     @Transactional
     @Override
     public List<AnalysisRestOutput> getAnalysis(User user) {
-        List<Analysis> analyses = analysisRepository.getAnalysis(user.getDni()).collect(Collectors.toList());
+        List<Analysis> analyses = user.getAnalyses();
         List<AnalysisRestOutput> output = new ArrayList<>();
         for (Analysis analysis : analyses){
             output.add(AnalysisMapper.mapAnalysisToOutput(analysis, user.getLanguage()));

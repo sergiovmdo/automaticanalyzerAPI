@@ -46,4 +46,8 @@ public interface UserService {
     Medication getHypercholesterolemiaMedication();
 
     String login(LoginRestInput loginRestInput) throws UserNotFound, InvalidPassword;
+
+    void setTestAnalysesToUser(final User user);
+
+    void setTestAppointmentsToUser(final User user);
 }

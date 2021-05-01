@@ -17,7 +17,7 @@ public class AnalysisMapper {
 
     public static AnalysisRestOutput mapAnalysisToOutput(Analysis analysis, Language language){
         AnalysisRestOutput analysisRestOutput = new AnalysisRestOutput();
-        analysisRestOutput.setAnalysisData(analysis.getAnalysisData());
+        analysisRestOutput.setAnalysisData(analysis.getDisease().formatAnalysisData(analysis.getAnalysisData(), language));
         analysisRestOutput.setDate(analysis.getDate());
         analysisRestOutput.setDisease(Strings.getStringFromObject(analysis.getDisease()).getLanguage(language));
 

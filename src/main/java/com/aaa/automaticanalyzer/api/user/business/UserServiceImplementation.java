@@ -9,11 +9,13 @@ import com.aaa.automaticanalyzer.exceptions.UserAlreadyExists;
 import com.aaa.automaticanalyzer.exceptions.UserNotFound;
 import com.aaa.automaticanalyzer.model.*;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
+import com.aaa.automaticanalyzer.model.analysis.Analysis;
+import com.aaa.automaticanalyzer.model.analysis.HypercholesterolemiaAnalysis;
+import com.aaa.automaticanalyzer.model.analysis.HypothyroidismAnalysis;
 import com.aaa.automaticanalyzer.processingengine.HyperCholersterolemiaEngine;
 import com.aaa.automaticanalyzer.processingengine.HypothyroidismEngine;
-import com.aaa.automaticanalyzer.repository.MedicationRepository;
-import com.aaa.automaticanalyzer.repository.MedicineRepository;
-import com.aaa.automaticanalyzer.repository.UserRepository;
+import com.aaa.automaticanalyzer.repository.*;
+import com.aaa.automaticanalyzer.utils.Utils;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,10 +31,11 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImplementation implements UserService {
-
+    private final CalendarRepository calendarRepository;
     private final UserRepository userRepository;
     private final MedicineRepository medicineRepository;
     private final MedicationRepository medicationRepository;
+    private final AnalysisRepository analysisRepository;
     private static final String SERVICENAME = "AAA";
 
     @Value("${oauthKey}")
@@ -48,6 +51,9 @@ public class UserServiceImplementation implements UserService {
 
             if (hashedPassword != null)
                 user.setPassword(hashedPassword);
+            // These methods are called for testing reasons
+            setTestAnalysesToUser(user);
+            setTestAppointmentsToUser(user);
             user.setMedications(getUserMedication(user));
             userRepository.save(user);
 
@@ -254,6 +260,43 @@ public class UserServiceImplementation implements UserService {
             }
         } else {
             throw new UserNotFound();
+        }
+    }
+
+    @Override
+    public void setTestAnalysesToUser(final User user) {
+        for (Disease disease : user.getDiseases()){
+            Analysis analysis = new Analysis();
+            user.getAnalyses().add(analysis);
+            analysis.setDate(Calendar.getInstance().getTimeInMillis());
+            analysis.setDisease(disease);
+            switch (disease){
+                case HYPOTHYROIDISM:
+                    HypothyroidismAnalysis hypothyroidismAnalysis = new HypothyroidismAnalysis();
+                    hypothyroidismAnalysis.setTSH("4,5");
+                    analysis.setAnalysisData(hypothyroidismAnalysis.toJson());
+                    break;
+                case HYPERCHOLESTEROLEMIA:
+                    HypercholesterolemiaAnalysis hypercholesterolemiaAnalysis = new HypercholesterolemiaAnalysis();
+                    hypercholesterolemiaAnalysis.setCLDL("70");
+                    hypercholesterolemiaAnalysis.setTotalCholesterol("170");
+                    analysis.setAnalysisData(hypercholesterolemiaAnalysis.toJson());
+                    break;
+            }
+
+            analysisRepository.save(analysis);
+        }
+    }
+
+    @Override
+    public void setTestAppointmentsToUser(final User user) {
+        for (Disease disease : user.getDiseases()){
+            Appointment appointment = new Appointment();
+            appointment.setDisease(disease);
+            appointment.setLocation("CAP Les Indianes");
+            appointment.setDate(Calendar.getInstance().getTimeInMillis() + 500000l);
+            user.getAppointments().add(appointment);
+            calendarRepository.save(appointment);
         }
     }
 

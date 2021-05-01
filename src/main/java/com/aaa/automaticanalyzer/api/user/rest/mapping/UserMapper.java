@@ -5,6 +5,8 @@ import com.aaa.automaticanalyzer.model.SimplifiedUser;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 
+import java.util.ArrayList;
+
 public class UserMapper {
     public static User createUserFromRestInput(UserRestInput input) {
         User user = new User();
@@ -16,6 +18,8 @@ public class UserMapper {
         user.setName(input.getName());
         user.setPhoneNumber(input.getPhoneNumber());
         user.setLanguage(Language.CASTELLANO);
+        user.setAppointments(new ArrayList<>());
+        user.setAnalyses(new ArrayList<>());
 
         return user;
     }

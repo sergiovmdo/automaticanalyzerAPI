@@ -13,10 +13,8 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
-    private User user;
-
     private Disease disease;
+
     private Long date;
 
     private String location;

@@ -4,7 +4,10 @@ import com.aaa.automaticanalyzer.model.Language;
 
 public enum Strings {
     HYPOTHYROIDISM("Hipotiroidismo", "Hipotiroidisme"),
-    HYPERCHOLESTEROLEMIA("Hipercolesterolemia", "Hipercolesterolèmia");
+    HYPERCHOLESTEROLEMIA("Hipercolesterolemia", "Hipercolesterolèmia"),
+    COLESTEROL("Colesterol total", "Colesterol total"),
+    CLDL("cLDL", "cLDL"),
+    TSH("TSH", "TSH");
 
     private String catalan;
     private String spanish;

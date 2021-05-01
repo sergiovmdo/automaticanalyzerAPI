@@ -38,4 +38,10 @@ public enum Disease {
         BaseAnalysis baseAnalysis = data.newInstance();
         return baseAnalysis.fromJson(str);
     }
+
+    @SneakyThrows
+    public String formatAnalysisData(String analysisContent, Language language) {
+        BaseAnalysis baseAnalysis = data.newInstance();
+        return baseAnalysis.formatContent(analysisContent, language);
+    }
 }

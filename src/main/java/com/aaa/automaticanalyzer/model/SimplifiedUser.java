@@ -16,6 +16,7 @@ public class SimplifiedUser {
         simplifiedUser.setLanguage(user.getLanguage().getName());
         simplifiedUser.setMail(user.getMail());
         simplifiedUser.setDni(user.getDni());
+        simplifiedUser.setPhoneNumber(user.getPhoneNumber());
         return simplifiedUser;
     }
 }
