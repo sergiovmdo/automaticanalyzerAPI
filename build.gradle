@@ -53,8 +53,12 @@ dependencies {
 
     //Firebase
     implementation 'com.google.firebase:firebase-admin:6.14.0'
+}
 
-
+jar {
+    from('src/main/resources') {
+        include  '*/.json'
+    }
 }
 
 test {

@@ -1,5 +1,6 @@
 package com.aaa.automaticanalyzer.api.chat.business;
 
+import com.aaa.automaticanalyzer.Strings;
 import com.aaa.automaticanalyzer.api.chat.domain.ChatRestInput;
 import com.aaa.automaticanalyzer.api.chat.domain.ChatRestOutput;
 import com.aaa.automaticanalyzer.api.chat.domain.MessageRestInput;
@@ -63,9 +64,9 @@ public class ChatServiceImplementation implements ChatService {
     }
 
     @Override
-    public ChatRestOutput getChat(Long id) {
+    public ChatRestOutput getChat(Long id, final User user) {
         Chat chat = chatRepository.findById(id).get();
-        return ChatMapper.createOutputFromChat(chat);
+        return ChatMapper.createOutputFromChat(chat, user.getLanguage());
     }
 
     @Override
@@ -73,7 +74,7 @@ public class ChatServiceImplementation implements ChatService {
         return chatRepository.getChatsByUser(user).stream().map(chat -> {
             SimplifiedChat simplifiedChat = new SimplifiedChat();
             simplifiedChat.setId(chat.getId());
-            simplifiedChat.setNursingSpeciality(chat.getNursingSpeciality());
+            simplifiedChat.setNursingSpeciality(Strings.getStringFromObject(chat.getNursingSpeciality()).getLanguage(user.getLanguage()));
             simplifiedChat.setLastMessageContent(chat.getMessages().get(chat.getMessages().size() - 1).getContent());
             return simplifiedChat;
         }).collect(Collectors.toList());

@@ -1,8 +1,12 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/AAA
-    username: postgres
-    password: 1234
+#    url: jdbc:postgresql://localhost:5432/AAA
+#    username: postgres
+#    password: 1234
+
+    url: jdbc:postgresql://aaa.cizomsyiccra.eu-central-1.rds.amazonaws.com:5432/postgres
+    username: sergiovmdo
+    password: Sopademacacovergoso97
   jpa:
     hibernate:
       ddl-auto: update
@@ -10,7 +14,7 @@ spring:
 oauthKey: 187Pd7q12FgqNqIm63AqrghGH38CJAIrHdueGxjuvi6YEbd2kGmAGuP/Q8HJ3HJq
 
 server:
-  port: 9000
+  port: 5000
   error:
     include-stacktrace: on_trace_param
 

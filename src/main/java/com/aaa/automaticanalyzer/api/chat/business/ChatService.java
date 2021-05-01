@@ -15,7 +15,7 @@ public interface ChatService {
 
     public ResponseEntity<Void> createMessage(MessageRestInput messageRestInput, final User user);
 
-    public ChatRestOutput getChat(Long id);
+    public ChatRestOutput getChat(Long id, final User user);
 
     public List<SimplifiedChat> getChats(final User user);
 }

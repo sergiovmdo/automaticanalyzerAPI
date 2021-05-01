@@ -15,7 +15,7 @@ public class ChatRestOutput {
 
     private SimplifiedUser user;
 
-    private NursingSpeciality nursingSpeciality;
+    private String nursingSpeciality;
 
     private List<MessageRestOutput> messages;
 

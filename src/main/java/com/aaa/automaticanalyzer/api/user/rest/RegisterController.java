@@ -5,7 +5,6 @@ import com.aaa.automaticanalyzer.api.user.business.UserService;
 import com.aaa.automaticanalyzer.exceptions.UserAlreadyExists;
 import com.aaa.automaticanalyzer.model.TokenResponse;
 import com.aaa.automaticanalyzer.model.User;
-import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;

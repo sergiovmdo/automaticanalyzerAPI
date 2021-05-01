@@ -6,7 +6,6 @@ import com.aaa.automaticanalyzer.exceptions.InvalidPassword;
 import com.aaa.automaticanalyzer.exceptions.UserNotFound;
 import com.aaa.automaticanalyzer.model.TokenResponse;
 import com.aaa.automaticanalyzer.model.User;
-import jdk.nashorn.internal.parser.Token;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

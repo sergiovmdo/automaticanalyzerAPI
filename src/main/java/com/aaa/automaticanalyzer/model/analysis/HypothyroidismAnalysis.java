@@ -32,6 +32,6 @@ public class HypothyroidismAnalysis extends BaseAnalysis<HypothyroidismAnalysis>
         String tshValue = contents[1];
         tshValue = tshValue.split(":")[1];
         tshValue = tshValue.replace("\"", "");
-        return Strings.TSH.getLanguage(language) + ": " + minTSH + " > " + tshValue + " < " + maxTSH + " " + units;
+        return Strings.TSH.getLanguage(language) + ": " + tshValue + " " + units + "  (" + minTSH + " - " + maxTSH + ")";
     }
 }

@@ -33,8 +33,8 @@ public class ChatController {
     }
 
     @GetMapping("/{id}")
-    public ChatRestOutput getChat(@PathVariable("id") Long id){
-        return chatService.getChat(id);
+    public ChatRestOutput getChat(@PathVariable("id") Long id, final User user){
+        return chatService.getChat(id, user);
     }
 
     @GetMapping

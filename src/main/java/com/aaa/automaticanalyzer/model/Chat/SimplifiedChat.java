@@ -9,6 +9,6 @@ import javax.persistence.*;
 @Data
 public class SimplifiedChat {
     private long id;
-    private NursingSpeciality nursingSpeciality;
+    private String nursingSpeciality;
     private String lastMessageContent;
 }
