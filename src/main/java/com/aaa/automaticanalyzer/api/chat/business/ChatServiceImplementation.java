@@ -10,7 +10,6 @@ import com.aaa.automaticanalyzer.model.Chat.Message;
 import com.aaa.automaticanalyzer.model.Chat.SimplifiedChat;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.notifications.MessagingService;
-import com.aaa.automaticanalyzer.notifications.NotificationType;
 import com.aaa.automaticanalyzer.repository.ChatRepository;
 import com.aaa.automaticanalyzer.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
@@ -71,7 +70,7 @@ public class ChatServiceImplementation implements ChatService {
 
     @Override
     public List<SimplifiedChat> getChats(final User user) {
-        return chatRepository.getChatsByUser(user).stream().map(chat -> {
+        return chatRepository.getChatsByUserOrderByCreatedDateDesc(user).stream().map(chat -> {
             SimplifiedChat simplifiedChat = new SimplifiedChat();
             simplifiedChat.setId(chat.getId());
             simplifiedChat.setNursingSpeciality(Strings.getStringFromObject(chat.getNursingSpeciality()).getLanguage(user.getLanguage()));
