@@ -1,9 +1,8 @@
 package com.aaa.automaticanalyzer.api.user.rest.mapping;
 
-import com.aaa.automaticanalyzer.model.Language;
-import com.aaa.automaticanalyzer.model.SimplifiedUser;
-import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
+import com.aaa.automaticanalyzer.model.Language;
+import com.aaa.automaticanalyzer.model.User;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,5 @@
 package com.aaa.automaticanalyzer.api.medication.domain;
 
-import com.aaa.automaticanalyzer.model.Medication;
 import com.aaa.automaticanalyzer.model.Medicine;
 import lombok.Data;
 

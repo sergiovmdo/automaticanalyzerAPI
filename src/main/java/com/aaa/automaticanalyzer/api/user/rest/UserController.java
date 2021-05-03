@@ -5,14 +5,11 @@ import com.aaa.automaticanalyzer.api.user.domain.LanguageRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
 import com.aaa.automaticanalyzer.common.AuthAwareRestController;
 import com.aaa.automaticanalyzer.exceptions.InvalidPassword;
-import com.aaa.automaticanalyzer.exceptions.UserNotFound;
 import com.aaa.automaticanalyzer.model.FCMToken;
 import com.aaa.automaticanalyzer.model.SimplifiedUser;
 import com.aaa.automaticanalyzer.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 

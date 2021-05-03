@@ -57,7 +57,7 @@ public class User {
     }
 
     public boolean isMedicated(Disease disease) {
-        if (medications.size() == 0)
+        if (medications.isEmpty())
             return false;
 
         for (Disease userDisease : diseases) {

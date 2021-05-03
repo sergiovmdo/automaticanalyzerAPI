@@ -7,10 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 
-import java.io.*;
-import java.util.stream.Stream;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.InputStream;
 
 @Component
 @Slf4j
@@ -21,9 +21,6 @@ public class FirebaseMessagingConfiguration implements ApplicationRunner {
     public void run(final ApplicationArguments args) throws Exception {
         log.debug("Initializing project {} from firebase", firebaseProject);
 
-//        FileInputStream serviceAccount =
-//                new FileInputStream(ResourceUtils.getFile("classpath:automatic-analyzer-firebase-adminsdk-sxh8o-7a9eda65b5.json"));
-//                new FileInputStream("C:\\Users\\sergi\\OneDrive\\Escritorio\\TFG\\automatic-analyzer-firebase-adminsdk-sxh8o-7a9eda65b5.json");
         String s = "{\n" +
                 "  \"type\": \"service_account\",\n" +
                 "  \"project_id\": \"automatic-analyzer\",\n" +

@@ -1,10 +1,6 @@
 package com.aaa.automaticanalyzer.common;
 
 import com.aaa.automaticanalyzer.api.user.business.UserService;
-import com.aaa.automaticanalyzer.api.user.rest.mapping.UserMapper;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
-import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

@@ -31,7 +31,7 @@ public class MessagingService {
     }
 
     @Async
-    public void notifyNewChatMessage(final User user, com.aaa.automaticanalyzer.model.Chat.Message message, Long chatId) {
+    public void notifyNewChatMessage(final User user, com.aaa.automaticanalyzer.model.chat.Message message, Long chatId) {
         if (user.getFirebaseToken() != null) {
             try {
                 Message notification = Message.builder().setToken(user.getFirebaseToken())

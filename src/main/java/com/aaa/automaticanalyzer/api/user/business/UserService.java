@@ -4,12 +4,13 @@ package com.aaa.automaticanalyzer.api.user.business;
 import com.aaa.automaticanalyzer.api.user.domain.LanguageRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.LoginRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
-import com.aaa.automaticanalyzer.exceptions.*;
-import com.aaa.automaticanalyzer.model.*;
 import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
-import org.springframework.http.ResponseEntity;
+import com.aaa.automaticanalyzer.exceptions.*;
+import com.aaa.automaticanalyzer.model.FCMToken;
+import com.aaa.automaticanalyzer.model.Medication;
+import com.aaa.automaticanalyzer.model.SimplifiedUser;
+import com.aaa.automaticanalyzer.model.User;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 

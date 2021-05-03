@@ -1,4 +1,4 @@
-package com.aaa.automaticanalyzer.model.Chat;
+package com.aaa.automaticanalyzer.model.chat;
 
 import com.aaa.automaticanalyzer.model.User;
 import lombok.Data;

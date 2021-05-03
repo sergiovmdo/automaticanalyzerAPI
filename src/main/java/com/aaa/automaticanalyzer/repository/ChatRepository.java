@@ -1,6 +1,6 @@
 package com.aaa.automaticanalyzer.repository;
 
-import com.aaa.automaticanalyzer.model.Chat.Chat;
+import com.aaa.automaticanalyzer.model.chat.Chat;
 import com.aaa.automaticanalyzer.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

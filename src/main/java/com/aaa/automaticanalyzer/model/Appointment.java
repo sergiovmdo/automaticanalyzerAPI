@@ -18,5 +18,4 @@ public class Appointment {
     private Long date;
 
     private String location;
-
 }

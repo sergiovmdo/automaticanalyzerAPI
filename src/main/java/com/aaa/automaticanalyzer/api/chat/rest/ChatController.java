@@ -5,12 +5,11 @@ import com.aaa.automaticanalyzer.api.chat.domain.ChatRestInput;
 import com.aaa.automaticanalyzer.api.chat.domain.ChatRestOutput;
 import com.aaa.automaticanalyzer.api.chat.domain.MessageRestInput;
 import com.aaa.automaticanalyzer.common.AuthAwareRestController;
-import com.aaa.automaticanalyzer.model.Chat.Chat;
-import com.aaa.automaticanalyzer.model.Chat.SimplifiedChat;
+import com.aaa.automaticanalyzer.model.chat.Chat;
+import com.aaa.automaticanalyzer.model.chat.SimplifiedChat;
 import com.aaa.automaticanalyzer.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

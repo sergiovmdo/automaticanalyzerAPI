@@ -16,7 +16,7 @@ public class AnalysisRestInput {
 
     /* Start of Hypothyroidism parameters */
 
-    private String TSH;
+    private String tsh;
 
     /* End of Hypothyroidism parameters */
 }

@@ -1,10 +1,7 @@
 package com.aaa.automaticanalyzer.model.analysis;
 
 import com.aaa.automaticanalyzer.model.Disease;
-import com.aaa.automaticanalyzer.model.User;
 import lombok.Data;
-import org.hibernate.annotations.Generated;
-import org.hibernate.tuple.GenerationTiming;
 
 import javax.persistence.*;
 

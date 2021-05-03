@@ -1,10 +1,7 @@
 package com.aaa.automaticanalyzer.api.chat.domain;
 
 import com.aaa.automaticanalyzer.model.SimplifiedUser;
-import com.aaa.automaticanalyzer.model.User;
 import lombok.Data;
-
-import javax.persistence.*;
 
 @Data
 public class MessageRestOutput {

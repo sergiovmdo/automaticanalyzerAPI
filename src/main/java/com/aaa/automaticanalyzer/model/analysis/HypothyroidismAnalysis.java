@@ -10,7 +10,7 @@ import lombok.SneakyThrows;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class HypothyroidismAnalysis extends BaseAnalysis<HypothyroidismAnalysis> {
-    private String TSH;
+    private String tsh;
     private String maxTSH = "4.78";
     private String minTSH = "0.55";
     private String units = "µUI/mL";
@@ -23,7 +23,7 @@ public class HypothyroidismAnalysis extends BaseAnalysis<HypothyroidismAnalysis>
 
     @Override
     public void parseInput(AnalysisRestInput analysisRestInput) {
-        setTSH(analysisRestInput.getTSH());
+        setTsh(analysisRestInput.getTsh());
     }
 
     @Override
@@ -32,6 +32,7 @@ public class HypothyroidismAnalysis extends BaseAnalysis<HypothyroidismAnalysis>
         String tshValue = contents[1];
         tshValue = tshValue.split(":")[1];
         tshValue = tshValue.replace("\"", "");
-        return Strings.TSH.getLanguage(language) + ": " + tshValue + " " + units + "  (" + minTSH + " - " + maxTSH + ")";
+        return Strings.TSH.getLanguage(language) + ": " + tshValue + " " + units +
+                "  (" + minTSH + " - " + maxTSH + ")";
     }
 }

@@ -5,9 +5,9 @@ import com.aaa.automaticanalyzer.api.chat.domain.ChatRestInput;
 import com.aaa.automaticanalyzer.api.chat.domain.ChatRestOutput;
 import com.aaa.automaticanalyzer.api.chat.domain.MessageRestInput;
 import com.aaa.automaticanalyzer.api.chat.rest.mapping.ChatMapper;
-import com.aaa.automaticanalyzer.model.Chat.Chat;
-import com.aaa.automaticanalyzer.model.Chat.Message;
-import com.aaa.automaticanalyzer.model.Chat.SimplifiedChat;
+import com.aaa.automaticanalyzer.model.chat.Chat;
+import com.aaa.automaticanalyzer.model.chat.Message;
+import com.aaa.automaticanalyzer.model.chat.SimplifiedChat;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.notifications.MessagingService;
 import com.aaa.automaticanalyzer.repository.ChatRepository;
@@ -20,6 +20,7 @@ import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -63,9 +64,13 @@ public class ChatServiceImplementation implements ChatService {
     }
 
     @Override
-    public ChatRestOutput getChat(Long id, final User user) {
-        Chat chat = chatRepository.findById(id).get();
-        return ChatMapper.createOutputFromChat(chat, user.getLanguage());
+    public ChatRestOutput getChat(Long id, final User user)  {
+        Optional<Chat> optChat = chatRepository.findById(id);
+        if (optChat.isPresent()) {
+            Chat chat = chatRepository.findById(id).get();
+            return ChatMapper.createOutputFromChat(chat, user.getLanguage());
+        }
+        return null;
     }
 
     @Override

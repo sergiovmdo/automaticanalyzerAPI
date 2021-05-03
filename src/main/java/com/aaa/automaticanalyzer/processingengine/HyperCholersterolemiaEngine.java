@@ -6,11 +6,9 @@ import com.aaa.automaticanalyzer.model.Medicine;
 import com.aaa.automaticanalyzer.model.User;
 import com.aaa.automaticanalyzer.model.analysis.BaseAnalysis;
 import com.aaa.automaticanalyzer.model.analysis.HypercholesterolemiaAnalysis;
-import com.aaa.automaticanalyzer.model.analysis.HypothyroidismAnalysis;
 import com.aaa.automaticanalyzer.notifications.MessagingService;
 import lombok.RequiredArgsConstructor;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +63,7 @@ public class HyperCholersterolemiaEngine implements ProcessingEngine {
 
     @Override
     public void decreaseMedication(List<Medication> medication) {
+        /* There is no possible cases of decreasing patien's hypercholesterolemia medication using this system */
     }
 
     @Override
@@ -125,8 +124,8 @@ public class HyperCholersterolemiaEngine implements ProcessingEngine {
     }
 
     private int calculateDesiredCLDLDecrease(String cldl, String maxCLDL) {
-        double cLDLValue = Double.valueOf(cldl);
-        double maxCLDLValue = Double.valueOf(maxCLDL);
+        double cLDLValue = Double.parseDouble(cldl);
+        double maxCLDLValue = Double.parseDouble(maxCLDL);
 
         double decrease = (maxCLDLValue - cLDLValue)/maxCLDLValue * 100;
 

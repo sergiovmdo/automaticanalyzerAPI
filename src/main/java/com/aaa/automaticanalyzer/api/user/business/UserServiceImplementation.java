@@ -3,23 +3,23 @@ package com.aaa.automaticanalyzer.api.user.business;
 import com.aaa.automaticanalyzer.api.user.domain.LanguageRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.LoginRestInput;
 import com.aaa.automaticanalyzer.api.user.domain.PasswordRestInput;
+import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 import com.aaa.automaticanalyzer.api.user.rest.mapping.UserMapper;
 import com.aaa.automaticanalyzer.exceptions.InvalidPassword;
 import com.aaa.automaticanalyzer.exceptions.UserAlreadyExists;
 import com.aaa.automaticanalyzer.exceptions.UserNotFound;
 import com.aaa.automaticanalyzer.model.*;
-import com.aaa.automaticanalyzer.api.user.domain.UserRestInput;
 import com.aaa.automaticanalyzer.model.analysis.Analysis;
 import com.aaa.automaticanalyzer.model.analysis.HypercholesterolemiaAnalysis;
 import com.aaa.automaticanalyzer.model.analysis.HypothyroidismAnalysis;
 import com.aaa.automaticanalyzer.processingengine.HyperCholersterolemiaEngine;
 import com.aaa.automaticanalyzer.processingengine.HypothyroidismEngine;
 import com.aaa.automaticanalyzer.repository.*;
-import com.aaa.automaticanalyzer.utils.Utils;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -37,6 +37,7 @@ public class UserServiceImplementation implements UserService {
     private final MedicationRepository medicationRepository;
     private final AnalysisRepository analysisRepository;
     private static final String SERVICENAME = "AAA";
+    private final Random random = new Random();
 
     @Value("${oauthKey}")
     private String tokenKey;
@@ -175,7 +176,7 @@ public class UserServiceImplementation implements UserService {
         Medicine medicine = new Medicine();
         medicine.setName(HypothyroidismEngine.EUTIROX);
 
-        Random random = new Random();
+
         int dose = random.nextInt(HypothyroidismEngine.doses.length);
         medicine.setDose(Double.valueOf(HypothyroidismEngine.doses[dose]));
         medication.setMedicines(Arrays.asList(medicine));
@@ -192,20 +193,10 @@ public class UserServiceImplementation implements UserService {
 
         Medicine medicine = new Medicine();
 
-        Random random = new Random();
         medicine.setName(HyperCholersterolemiaEngine.HyperCholersterolemiaMedicines.values()[random.nextInt(HyperCholersterolemiaEngine.HyperCholersterolemiaMedicines.values().length)].getName());
 
         switch (medicine.getName()) {
             case "Pravastatina":
-                switch (random.nextInt(2)) {
-                    case 0:
-                        medicine.setDose(20d);
-                        break;
-                    case 1:
-                        medicine.setDose(40d);
-                        break;
-                }
-                break;
             case "Lovastatina":
                 switch (random.nextInt(2)) {
                     case 0:
@@ -214,6 +205,8 @@ public class UserServiceImplementation implements UserService {
                     case 1:
                         medicine.setDose(40d);
                         break;
+                    default:
+                        medicine.setDose(0d);
                 }
                 break;
             case "Simvastatina":
@@ -226,6 +219,9 @@ public class UserServiceImplementation implements UserService {
                         break;
                     case 2:
                         medicine.setDose(40d);
+                        break;
+                    default:
+                        medicine.setDose(0d);
                 }
                 break;
             case "Atrovastatina":
@@ -236,8 +232,12 @@ public class UserServiceImplementation implements UserService {
                     case 1:
                         medicine.setDose(80d);
                         break;
+                    default:
+                        medicine.setDose(0d);
                 }
                 break;
+            default:
+                medicine.setDose(0d);
         }
 
         medication.setMedicines(Arrays.asList(medicine));
@@ -273,7 +273,7 @@ public class UserServiceImplementation implements UserService {
             switch (disease){
                 case HYPOTHYROIDISM:
                     HypothyroidismAnalysis hypothyroidismAnalysis = new HypothyroidismAnalysis();
-                    hypothyroidismAnalysis.setTSH("4,5");
+                    hypothyroidismAnalysis.setTsh("4,5");
                     analysis.setAnalysisData(hypothyroidismAnalysis.toJson());
                     break;
                 case HYPERCHOLESTEROLEMIA:
