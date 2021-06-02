@@ -32,10 +32,11 @@ public class AnalysisServiceImplementation implements AnalysisService {
         analysis.getDisease().addAnalysisData(analysis, analysisRestInput);
         analysis.setDate(Calendar.getInstance().getTimeInMillis());
         user.getAnalyses().add(analysis);
-        analysisRepository.save(analysis);
         boolean medicationModified = analysis.getDisease().getEngine().modifyMedication(user, analysis.getDisease().getAnalisis(analysis.getAnalysisData()));
+        analysis.setModified(medicationModified);
+        analysisRepository.save(analysis);
         if (medicationModified) {
-            for (Medication medication : user.getMedications()) {c
+            for (Medication medication : user.getMedications()) {
                 medicationRepository.save(medication);
                 if (medication.isNeedsRevision()){
                     messagingService.notifyUser(user, NotificationType.REVISION.getNotificationTitle(), NotificationType.REVISION.getNotificationBody(), NotificationType.REVISION);

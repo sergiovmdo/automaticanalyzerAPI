@@ -19,4 +19,6 @@ public class Analysis {
 
     private String analysisData;
 
+    private boolean modified = false;
+
 }

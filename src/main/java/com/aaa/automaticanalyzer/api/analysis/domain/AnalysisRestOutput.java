@@ -8,4 +8,6 @@ public class AnalysisRestOutput {
     private Long date;
 
     private String analysisData;
+
+    private boolean modified;
 }

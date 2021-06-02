@@ -270,6 +270,7 @@ public class UserServiceImplementation implements UserService {
             user.getAnalyses().add(analysis);
             analysis.setDate(Calendar.getInstance().getTimeInMillis());
             analysis.setDisease(disease);
+            analysis.setModified(true);
             switch (disease){
                 case HYPOTHYROIDISM:
                     HypothyroidismAnalysis hypothyroidismAnalysis = new HypothyroidismAnalysis();

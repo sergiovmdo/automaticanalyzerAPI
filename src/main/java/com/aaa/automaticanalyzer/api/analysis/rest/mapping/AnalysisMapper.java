@@ -19,7 +19,7 @@ public class AnalysisMapper {
         analysisRestOutput.setAnalysisData(analysis.getDisease().formatAnalysisData(analysis.getAnalysisData(), language));
         analysisRestOutput.setDate(analysis.getDate());
         analysisRestOutput.setDisease(Strings.getStringFromObject(analysis.getDisease()).getLanguage(language));
-
+        analysisRestOutput.setModified(analysis.isModified());
         return analysisRestOutput;
     }
 }

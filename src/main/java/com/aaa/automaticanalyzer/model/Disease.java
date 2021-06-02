@@ -41,7 +41,7 @@ public enum Disease {
 
     @SneakyThrows
     public String formatAnalysisData(String analysisContent, Language language) {
-        BaseAnalysis baseAnalysis = data.newInstance();
+        BaseAnalysis baseAnalysis = getAnalisis(analysisContent);
         return baseAnalysis.formatContent(analysisContent, language);
     }
 }
